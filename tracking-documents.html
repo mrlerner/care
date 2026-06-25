@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Care Tracking Documents</title>
+<style>
+  :root {
+    --bg: #f4f6f8;
+    --panel: #ffffff;
+    --ink: #1c2733;
+    --muted: #5e6b78;
+    --line: #d4dce4;
+    --line-strong: #9fb0bf;
+    --accent: #1f6f8b;
+    --accent-soft: #e3eef2;
+    --good: #1f8b4c;
+    --good-soft: #e3f3e9;
+    --watch: #b9770a;
+    --watch-soft: #fbf0db;
+    --flag: #c0392b;
+    --flag-soft: #fbe4e1;
+    --refeed: #6b3fa0;
+    --refeed-soft: #efe7f7;
+    --shadow: 0 1px 3px rgba(20,40,60,.08), 0 4px 16px rgba(20,40,60,.06);
+    --radius: 10px;
+    font-synthesis: none;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  header.app {
+    background: linear-gradient(135deg, #1f6f8b, #2a8aa8);
+    color: #fff;
+    padding: 22px 28px 18px;
+  }
+  header.app h1 { margin: 0 0 4px; font-size: 22px; letter-spacing: -.2px; }
+  header.app p { margin: 0; font-size: 13px; opacity: .92; max-width: 70ch; }
+  .disclaimer {
+    margin-top: 10px; font-size: 12px; background: rgba(255,255,255,.14);
+    border-radius: 8px; padding: 8px 12px; max-width: 90ch;
+  }
+
+  nav.tabs {
+    position: sticky; top: 0; z-index: 20;
+    display: flex; flex-wrap: wrap; gap: 4px;
+    background: var(--panel); padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+    box-shadow: 0 2px 8px rgba(20,40,60,.04);
+  }
+  .tab-btn {
+    border: 1px solid transparent; background: transparent; cursor: pointer;
+    font: inherit; font-size: 13px; color: var(--muted);
+    padding: 7px 12px; border-radius: 8px; display: flex; align-items: center; gap: 7px;
+    transition: background .12s, color .12s;
+  }
+  .tab-btn:hover { background: var(--accent-soft); color: var(--accent); }
+  .tab-btn.active { background: var(--accent); color: #fff; }
+  .tier-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+  }
+  .t1 { background: var(--flag); }
+  .t2 { background: var(--watch); }
+  .t3 { background: var(--good); }
+  .tab-btn.active .tier-dot { box-shadow: 0 0 0 2px rgba(255,255,255,.6); }
+
+  main { padding: 22px 28px 60px; max-width: 1160px; margin: 0 auto; }
+  .tab-panel { display: none; animation: fade .18s ease; }
+  .tab-panel.active { display: block; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  .doc {
+    background: var(--panel); border: 1px solid var(--line);
+    border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: 26px 28px 30px; margin-bottom: 22px;
+  }
+  .doc-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; flex-wrap: wrap; border-bottom: 2px solid var(--ink); padding-bottom: 12px; margin-bottom: 16px; }
+  .doc-head h2 { margin: 0 0 3px; font-size: 19px; letter-spacing: -.2px; }
+  .doc-head .sub { margin: 0; font-size: 12.5px; color: var(--muted); max-width: 62ch; }
+  .tier-badge { font-size: 11px; font-weight: 600; padding: 4px 9px; border-radius: 20px; white-space: nowrap; }
+  .badge-t1 { background: var(--flag-soft); color: var(--flag); }
+  .badge-t2 { background: var(--watch-soft); color: var(--watch); }
+  .badge-t3 { background: var(--good-soft); color: var(--good); }
+  .badge-ref { background: var(--accent-soft); color: var(--accent); }
+
+  .fields { display: flex; flex-wrap: wrap; gap: 10px 22px; margin-bottom: 16px; }
+  .field { font-size: 12.5px; color: var(--muted); display: flex; align-items: baseline; gap: 6px; }
+  .field .blank { display: inline-block; min-width: 130px; border-bottom: 1px solid var(--line-strong); height: 18px; }
+  .field .blank.sm { min-width: 70px; }
+  .field .blank.lg { min-width: 220px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { border: 1px solid var(--line); padding: 7px 8px; text-align: left; vertical-align: middle; }
+  thead th { background: #eef3f6; color: var(--ink); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .3px; }
+  tbody tr { height: 34px; }
+  tbody td { color: #2c3a47; }
+  .num { text-align: center; }
+  .write { background: repeating-linear-gradient(transparent, transparent 32px, var(--line) 33px); }
+  tr.checkpoint td { background: var(--watch-soft); font-weight: 600; }
+  tr.totals td { background: var(--accent-soft); font-weight: 700; }
+  th.refeed, td.refeed { background: var(--refeed-soft); }
+  thead th.refeed { background: #e2d4f0; color: var(--refeed); }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+  .chip { font-size: 11.5px; padding: 4px 10px; border-radius: 6px; font-weight: 600; }
+  .chip.good { background: var(--good-soft); color: var(--good); }
+  .chip.watch { background: var(--watch-soft); color: var(--watch); }
+  .chip.flag { background: var(--flag-soft); color: var(--flag); }
+  .chip.neutral { background: #eef3f6; color: var(--muted); }
+
+  .note { font-size: 12px; color: var(--muted); margin-top: 14px; padding: 11px 14px; background: #f8fafb; border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; }
+  .note strong { color: var(--ink); }
+  .note.warn { border-left-color: var(--flag); background: var(--flag-soft); }
+  .note.warn strong { color: var(--flag); }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: #fcfdfe; }
+  .card h3 { margin: 0 0 4px; font-size: 15px; }
+  .card .blendmeta { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+  .card table { font-size: 12px; }
+  .density { margin-top: 10px; font-weight: 700; color: var(--accent); font-size: 13px; background: var(--accent-soft); padding: 8px 10px; border-radius: 7px; text-align: center; }
+
+  .keygrid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .keybox { border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+  .keybox h3 { margin: 0 0 10px; font-size: 14px; display: flex; align-items: center; gap: 8px; }
+  .keybox ul { margin: 0; padding-left: 18px; font-size: 12.5px; color: #2c3a47; }
+  .keybox li { margin-bottom: 6px; }
+  .swatchrow { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; font-size: 12.5px; }
+  .swatch { width: 26px; height: 16px; border-radius: 4px; flex: none; border: 1px solid rgba(0,0,0,.12); }
+  .u1 { background: #f5e9b8; } .u2 { background: #e9d579; } .u3 { background: #d9b441; }
+  .u4 { background: #c08a1e; } .u5 { background: #8c5a12; }
+
+  .tickcell { text-align: center; font-size: 15px; color: var(--line-strong); }
+
+  .printbar { display: flex; justify-content: flex-end; margin-bottom: 14px; }
+  .printbtn { font: inherit; font-size: 12.5px; border: 1px solid var(--accent); color: var(--accent); background: #fff; padding: 7px 14px; border-radius: 8px; cursor: pointer; }
+  .printbtn:hover { background: var(--accent); color: #fff; }
+
+  @media print {
+    header.app, nav.tabs, .printbar { display: none !important; }
+    body { background: #fff; }
+    main { padding: 0; max-width: none; }
+    .tab-panel { display: none !important; }
+    .tab-panel.active { display: block !important; }
+    .doc { box-shadow: none; border: none; padding: 0; }
+    .doc + .doc { page-break-before: always; }
+    tbody tr { height: 30px; }
+    @page { margin: 14mm; }
+  }
+</style>
+</head>
+<body>
+
+<header class="app">
+  <h1>Daily Care Forms</h1>
+  <p>Simple forms for the patient's caregivers. Fill them in by hand. Each form tells you what to do — there is no math, and you can't go wrong by writing things down.</p>
+  <div class="disclaimer">⚠️ These are organizing forms — <strong>not medical advice</strong>. The doctor and dietitian decide the patient's food amounts and any medicine changes. Important: do not increase food amounts quickly — the doctor sets how fast to add calories.</div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="tab-btn active" data-tab="food"><span class="tier-dot t1"></span>Food &amp; Drink</button>
+  <button class="tab-btn" data-tab="weight"><span class="tier-dot t1"></span>Weight</button>
+  <button class="tab-btn" data-tab="labs"><span class="tier-dot t1"></span>Blood Tests</button>
+  <button class="tab-btn" data-tab="symptoms"><span class="tier-dot t2"></span>Symptoms</button>
+  <button class="tab-btn" data-tab="repos"><span class="tier-dot t2"></span>Turning</button>
+  <button class="tab-btn" data-tab="meds"><span class="tier-dot t2"></span>Medicines</button>
+  <button class="tab-btn" data-tab="exertion"><span class="tier-dot t3"></span>Activity</button>
+  <button class="tab-btn" data-tab="hygiene"><span class="tier-dot t3"></span>Weekly Cleaning</button>
+  <button class="tab-btn" data-tab="crash"><span class="tier-dot t3"></span>Crash Log</button>
+  <button class="tab-btn" data-tab="recipes"><span class="tier-dot" style="background:var(--accent)"></span>Recipe Cards</button>
+  <button class="tab-btn" data-tab="key"><span class="tier-dot" style="background:var(--accent)"></span>Quick Guide</button>
+</nav>
+
+<main>
+
+<!-- ================= FOOD & FLUID ================= -->
+<section class="tab-panel active" id="food">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Food &amp; Drink Log</h2>
+        <p class="sub">Use one page each day. Write one line every time you feed the patient. Also write down how much the patient pees. Add everything up at the bottom.</p>
+      </div>
+      <span class="tier-badge badge-t1">Most important</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">Date: <span class="blank"></span></span>
+      <span class="field">Daily goals (the dietitian fills these in): <span class="blank sm"></span> calories · <span class="blank sm"></span> g protein · <span class="blank sm"></span> ml drink</span>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:7%">Time</th>
+          <th style="width:23%">What you gave (food / drink)</th>
+          <th class="num" style="width:9%">Amount given (ml)</th>
+          <th class="num" style="width:13%">How much the patient took (0 / ¼ / ½ / ¾ / all)</th>
+          <th class="num" style="width:9%">ml taken</th>
+          <th class="num" style="width:8%">Calories*</th>
+          <th class="num" style="width:8%">Protein (g)*</th>
+          <th class="num" style="width:10%">Total drink so far (ml)</th>
+          <th class="num" style="width:7%">Initials</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr class="checkpoint"><td>3 pm</td><td colspan="4">3 PM CHECK — add up so far. Has the patient had less than about half the daily goal? Plan extra feeds before bed.</td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr class="totals"><td colspan="5">DAY TOTALS</td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:14px; margin:22px 0 8px;">Pee (urine) — how much. To measure: weigh the wet pad, then take away the dry pad weight. 1 gram = 1 ml.</h3>
+    <table>
+      <thead>
+        <tr><th style="width:14%">Time</th><th class="num" style="width:18%">Pee (ml)</th><th style="width:54%">Notes (colour, poop, vomit)</th><th class="num" style="width:14%">Initials</th></tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td></tr>
+        <tr class="totals"><td>TOTAL PEE</td><td class="num"></td><td>Total drink − total pee = <strong>________ ml</strong></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <div class="legend">
+      <span class="chip good">Took ¾ or more = good</span>
+      <span class="chip watch">Took about half = keep an eye out</span>
+      <span class="chip flag">Took half or less = tell the nurse</span>
+      <span class="chip neutral">Nothing to report? Write a dash (—). Never leave a box empty.</span>
+    </div>
+    <div class="note"><strong>* You don't do any math.</strong> Look up the calories and protein on the Recipe Card and copy them in. Write down what the patient <strong>actually took</strong>, not what you offered. Fill this in right after each feed — don't wait until the end of the day.</div>
+  </div>
+</section>
+
+<!-- ================= WEIGHT ================= -->
+<section class="tab-panel" id="weight">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Weight Log</h2>
+        <p class="sub">Use one sheet for many days — keep adding new lines. What matters is whether the weight goes up or down over time, not any single number.</p>
+      </div>
+      <span class="tier-badge badge-t1">Most important</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">Starting weight: <span class="blank sm"></span></span>
+      <span class="field">Scale used: <span class="blank"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:14%">Date</th><th style="width:10%">Time</th><th class="num" style="width:13%">Weight</th>
+          <th style="width:16%">Scale used</th><th style="width:12%">Who weighed</th>
+          <th class="num" style="width:12%">Change since last</th><th class="num" style="width:12%">Change from start</th><th style="width:11%">Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="legend">
+      <span class="chip watch">Losing weight week to week? Tell the nurse.</span>
+      <span class="chip flag">A bigger drop over a month? Tell the nurse.</span>
+    </div>
+    <div class="note"><strong>Weigh at the same time each day, with the same scale, after the patient pees.</strong> This keeps the numbers fair to compare. A special under-bed scale can weigh the patient without moving them.</div>
+  </div>
+</section>
+
+<!-- ================= LABS ================= -->
+<section class="tab-panel" id="labs">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Blood Test Log</h2>
+        <p class="sub">Copy the blood test numbers here, one line per test. The purple columns are the most important — if they drop over time, tell the nurse.</p>
+      </div>
+      <span class="tier-badge badge-t1">Most important</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">How often to do blood tests (the doctor decides): <span class="blank"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:11%">Date</th>
+          <th class="num">Na</th>
+          <th class="num refeed">K</th>
+          <th class="num refeed">Mg</th>
+          <th class="num refeed">Phos</th>
+          <th class="num">Ca</th>
+          <th class="num">Cl</th>
+          <th class="num">CO₂</th>
+          <th class="num">BUN</th>
+          <th class="num">Cr</th>
+          <th class="num">Gluc</th>
+          <th class="num">Alb</th>
+          <th class="num" style="width:9%">Problem?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td style="color:var(--muted); font-size:11px;">Normal range →</td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr><td></td><td class="num"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num refeed"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="legend"><span class="chip" style="background:var(--refeed-soft); color:var(--refeed)">Purple = the 3 most important numbers (potassium, magnesium, phosphate)</span></div>
+    <div class="note warn"><strong>If the purple numbers go down, tell the nurse — even if they are not very low yet.</strong> This matters most in the day or two after the patient's food amount goes up. Caregivers don't fill this in — the family or the nurse does, from the blood test.</div>
+  </div>
+</section>
+
+<!-- ================= SYMPTOMS ================= -->
+<section class="tab-panel" id="symptoms">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Symptom Sheet</h2>
+        <p class="sub">Questions to ask the patient 1 to 2 times a day. Ask quietly and gently. Start today — you can't go back and fill this in later.</p>
+      </div>
+      <span class="tier-badge badge-t2">Start now</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">Date: <span class="blank"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="width:34%">Question</th><th style="width:25%">Morning &nbsp;(time: ____ )</th><th style="width:25%">Afternoon/Evening &nbsp;(time: ____ )</th><th style="width:16%">Different from before?</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>How did you sleep?</td><td></td><td></td><td></td></tr>
+        <tr><td>Are you thirsty?</td><td></td><td></td><td></td></tr>
+        <tr><td>Are you hungry?</td><td></td><td></td><td></td></tr>
+        <tr><td>Any new pain? (where / 0–10)</td><td></td><td></td><td></td></tr>
+        <tr><td>Main complaint right now?</td><td></td><td></td><td></td></tr>
+        <tr><td>Any hot spots?</td><td></td><td></td><td></td></tr>
+        <tr><td>How are your feet?</td><td></td><td></td><td></td></tr>
+        <tr><td>Other / anything new?</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Lean in and ask gently and quietly.</strong> For pain, ask the patient to rate it from 0 to 10. Write the patient's own words for their main complaint. Always write the time — a bad reaction can show up 1 to 2 days after the cause, so times help us find the pattern.</div>
+  </div>
+</section>
+
+<!-- ================= REPOSITIONING ================= -->
+<section class="tab-panel" id="repos">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Turning Chart</h2>
+        <p class="sub">Turn the patient every 2 hours. Tick which side you turned the patient onto, and check their skin. Turning often helps stop bed sores.</p>
+      </div>
+      <span class="tier-badge badge-t2">Start now</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">Date: <span class="blank"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="width:14%">Time</th><th class="num" style="width:14%">Left side</th><th class="num" style="width:14%">Right side</th><th class="num" style="width:14%">Back</th><th class="num" style="width:18%">Skin look OK? (yes / worried)</th><th style="width:14%">Initials</th><th style="width:12%">Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>06:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>08:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>10:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>12:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>14:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>16:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>18:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>20:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>22:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>00:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>02:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+        <tr><td>04:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Don't leave a row empty.</strong> If you skipped a turn — for example, the patient couldn't handle being moved — write why in Notes.</div>
+  </div>
+</section>
+
+<!-- ================= MEDS ================= -->
+<section class="tab-panel" id="meds">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Medicine Log</h2>
+        <p class="sub">This is the medicine sheet. Write the dose you gave and your initials in each time box. Extra "only-when-needed" medicines go in the second table.</p>
+      </div>
+      <span class="tier-badge badge-t2">Start now</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">Date: <span class="blank"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="width:24%">Medication</th><th style="width:12%">Dose</th><th class="num">Morning</th><th class="num">Noon</th><th class="num">Evening</th><th class="num">Night</th><th style="width:14%">Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:14px; margin:20px 0 8px;">Extra medicines (only when needed)</h3>
+    <table>
+      <thead><tr><th style="width:20%">Time</th><th style="width:28%">Medicine</th><th style="width:16%">Dose</th><th style="width:24%">Why you gave it</th><th style="width:12%">Initials</th></tr></thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="font-size:14px; margin:22px 0 8px;">Lowering medicines — one at a time</h3>
+    <table>
+      <thead><tr><th style="width:12%">Date changed</th><th style="width:22%">Medicine</th><th style="width:18%">Old dose → New dose</th><th style="width:30%">What to watch for</th><th style="width:18%">Keep the change or go back?</th></tr></thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="note warn"><strong>Only change one medicine at a time.</strong> After a change, wait and watch the Symptom Sheet before changing anything else. That way we know what caused any change in how the patient feels. If the patient changes a dose on their own, write that here too.</div>
+  </div>
+</section>
+
+<!-- ================= EXERTION ================= -->
+<section class="tab-panel" id="exertion">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Activity &amp; Movement Log</h2>
+        <p class="sub">Write down anything that uses the patient's energy: exercises, small movements the patient does on their own, or tiring care like a long wash. A bad reaction can come 1 to 2 days later, so this helps us find the cause.</p>
+      </div>
+      <span class="tier-badge badge-t3">Helpful</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">Date: <span class="blank"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="width:10%">Time</th><th style="width:30%">What happened</th><th style="width:16%">Who did it (you / the patient)</th><th style="width:16%">How long / how many</th><th style="width:18%">How the patient handled it (ok / tiring / too much)</th><th style="width:10%">Initials</th></tr>
+      </thead>
+      <tbody>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="legend">
+      <span class="chip neutral">Moving the patient's arms/legs for them</span>
+      <span class="chip neutral">Toe pumps</span>
+      <span class="chip neutral">Knees side to side</span>
+      <span class="chip neutral">Gentle hip rocking</span>
+      <span class="chip neutral">the patient moving themselves</span>
+      <span class="chip neutral">Washing / bathing</span>
+    </div>
+    <div class="note"><strong>Write down tiring care too</strong>, like a long head wash — not just exercise. Anything that tires the patient out can matter.</div>
+  </div>
+</section>
+
+<!-- ================= HYGIENE ================= -->
+<section class="tab-panel" id="hygiene">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Weekly Cleaning &amp; Comfort Checklist</h2>
+        <p class="sub">Once a week. Tick the day you do each task and add your initials. Includes planned time with the neck brace, eye mask, and earplugs OFF.</p>
+      </div>
+      <span class="tier-badge badge-t3">Helpful</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+      <span class="field">Week of: <span class="blank"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="width:26%">Task</th><th class="num">Mon</th><th class="num">Tue</th><th class="num">Wed</th><th class="num">Thu</th><th class="num">Fri</th><th class="num">Sat</th><th class="num">Sun</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Change &amp; wash bedding</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Change shirt</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Change pillowcases</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Time with neck brace OFF</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Time with eye mask OFF</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Time with earplugs OUT</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Other: __________</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+      </tbody>
+    </table>
+    <div class="note"><strong>Taking the brace, mask, and earplugs off is planned on purpose.</strong> Tick it so we can see it's really happening. Add your initials each time.</div>
+  </div>
+</section>
+
+<!-- ================= CRASH ================= -->
+<section class="tab-panel" id="crash">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Crash Log (bad days)</h2>
+        <p class="sub">Write down when the patient has a crash — a big drop in how they feel. Then we look back 1 to 2 days at the other logs to find what may have caused it.</p>
+      </div>
+      <span class="tier-badge badge-t3">Helpful</span>
+    </div>
+    <div class="fields">
+      <span class="field">Patient: <span class="blank lg"></span></span>
+    </div>
+    <table>
+      <thead>
+        <tr><th style="width:16%">Date / time you noticed</th><th style="width:14%">How bad (mild / medium / severe)</th><th style="width:26%">What you saw</th><th style="width:32%">What might have caused it in the last 1–2 days</th><th style="width:12%">Initials</th></tr>
+      </thead>
+      <tbody>
+        <tr style="height:60px"><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr style="height:60px"><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr style="height:60px"><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr style="height:60px"><td></td><td></td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="note warn"><strong>For a crash, let the patient rest in a quiet, dark room.</strong> But if the patient seems very sick — confused, heart racing, trouble breathing, or throwing up — call the nurse or doctor right away.</div>
+  </div>
+</section>
+
+<!-- ================= RECIPE CARDS ================= -->
+<section class="tab-panel" id="recipes">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Recipe Cards</h2>
+        <p class="sub">One card for each blend. The calories are already worked out. Find how much the patient took in the "Quick lookup" table, then copy the calories and protein onto the Food &amp; Drink Log. No math.</p>
+      </div>
+      <span class="tier-badge badge-ref">Helper sheet</span>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <h3>Ensure Plus Power Blend</h3>
+        <div class="blendmeta">½ bottle Ensure Plus + 1 scoop whey + 2 tbsp heavy cream → makes ~150 mL</div>
+        <table>
+          <tbody>
+            <tr><td>Ingredient</td><td class="num">Calories</td><td class="num">Protein (g)</td><td class="num">mL</td></tr>
+            <tr><td>½ Ensure Plus (100 mL)</td><td class="num">150</td><td class="num">6.3</td><td class="num">100</td></tr>
+            <tr><td>1 scoop whey protein (30 g)</td><td class="num">120</td><td class="num">24</td><td class="num">21</td></tr>
+            <tr><td>2 tbsp heavy cream (30 mL)</td><td class="num">100</td><td class="num">0.6</td><td class="num">30</td></tr>
+            <tr style="font-weight:700"><td>Batch total</td><td class="num">370</td><td class="num">31</td><td class="num">~150</td></tr>
+          </tbody>
+        </table>
+        <div class="density">Each ml ≈ 2.5 calories and 0.2 g protein</div>
+        <table style="margin-top:10px">
+          <thead><tr><th>Quick lookup</th><th class="num">50 mL</th><th class="num">100 mL</th><th class="num">150 mL</th></tr></thead>
+          <tbody><tr><td>Calories</td><td class="num">123</td><td class="num">247</td><td class="num">370</td></tr><tr><td>Protein (g)</td><td class="num">10</td><td class="num">21</td><td class="num">31</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Chia Pudding (full-fat Greek yogurt)</h3>
+        <div class="blendmeta">150 g Greek yogurt + 15 g chia + 70 g fruit purée &amp; sugar + 50 mL whole milk → makes ~285 g</div>
+        <table>
+          <tbody>
+            <tr><td>Ingredient</td><td class="num">Calories</td><td class="num">Protein (g)</td><td class="num">g</td></tr>
+            <tr><td>Full-fat Greek yogurt (150 g)</td><td class="num">150</td><td class="num">13.5</td><td class="num">150</td></tr>
+            <tr><td>Chia seeds (15 g / 1½ tbsp)</td><td class="num">73</td><td class="num">2.5</td><td class="num">15</td></tr>
+            <tr><td>Fruit purée + 1 tsp sugar (70 g)</td><td class="num">70</td><td class="num">0.5</td><td class="num">70</td></tr>
+            <tr><td>Whole milk (50 mL)</td><td class="num">31</td><td class="num">1.6</td><td class="num">50</td></tr>
+            <tr style="font-weight:700"><td>Batch total</td><td class="num">324</td><td class="num">18</td><td class="num">285</td></tr>
+          </tbody>
+        </table>
+        <div class="density">Each gram ≈ 1.1 calories and 0.06 g protein</div>
+        <table style="margin-top:10px">
+          <thead><tr><th>Quick lookup</th><th class="num">50 g</th><th class="num">100 g</th><th class="num">150 g</th></tr></thead>
+          <tbody><tr><td>Calories</td><td class="num">57</td><td class="num">114</td><td class="num">171</td></tr><tr><td>Protein (g)</td><td class="num">3</td><td class="num">6</td><td class="num">9.5</td></tr></tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h3>Nut-Butter Banana Smoothie</h3>
+        <div class="blendmeta">Whole milk + banana + peanut butter + ½ scoop whey + honey → makes ~360 mL</div>
+        <table>
+          <tbody>
+            <tr><td>Ingredient</td><td class="num">Calories</td><td class="num">Protein (g)</td><td class="num">mL</td></tr>
+            <tr><td>Whole milk (200 mL)</td><td class="num">122</td><td class="num">6.6</td><td class="num">200</td></tr>
+            <tr><td>Banana, 1 medium (120 g)</td><td class="num">107</td><td class="num">1.3</td><td class="num">120</td></tr>
+            <tr><td>Peanut butter (1 tbsp / 16 g)</td><td class="num">94</td><td class="num">4</td><td class="num">17</td></tr>
+            <tr><td>½ scoop whey protein (15 g)</td><td class="num">60</td><td class="num">12</td><td class="num">10</td></tr>
+            <tr><td>Honey (1 tbsp / 21 g)</td><td class="num">64</td><td class="num">0</td><td class="num">15</td></tr>
+            <tr style="font-weight:700"><td>Batch total</td><td class="num">447</td><td class="num">24</td><td class="num">~360</td></tr>
+          </tbody>
+        </table>
+        <div class="density">Each ml ≈ 1.2 calories and 0.07 g protein</div>
+        <table style="margin-top:10px">
+          <thead><tr><th>Quick lookup</th><th class="num">50 mL</th><th class="num">100 mL</th><th class="num">150 mL</th></tr></thead>
+          <tbody><tr><td>Calories</td><td class="num">62</td><td class="num">124</td><td class="num">186</td></tr><tr><td>Protein (g)</td><td class="num">3</td><td class="num">7</td><td class="num">10</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="note"><strong>The calories are already worked out — caregivers don't do any math.</strong> Use the "Quick lookup" table: find how much the patient took (50, 100, or 150), and copy the calories and protein onto the Food &amp; Drink Log. If you change a recipe, the family will work out the new numbers. The dietitian checks the final recipes.</div>
+  </div>
+</section>
+
+<!-- ================= REFERENCE KEY ================= -->
+<section class="tab-panel" id="key">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print this form</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Quick Guide (put on the wall)</h2>
+        <p class="sub">Print this, cover it in plastic, and put it on the wall. It helps everyone fill in the sheets the same way.</p>
+      </div>
+      <span class="tier-badge badge-ref">Helper sheet</span>
+    </div>
+    <div class="keygrid">
+      <div class="keybox">
+        <h3>📏 How big are our cups? (measure once)</h3>
+        <ul>
+          <li>Feeding cup = <strong>______ ml</strong></li>
+          <li>Small cup = <strong>______ ml</strong></li>
+          <li>Mug = <strong>______ ml</strong></li>
+          <li>Syringe = <strong>______ ml</strong></li>
+          <li>Teaspoon = about 5 ml · Tablespoon = about 15 ml</li>
+        </ul>
+        <p style="font-size:11.5px; color:var(--muted); margin:8px 0 0;">Don't guess — measure each cup once and use these numbers.</p>
+      </div>
+
+      <div class="keybox">
+        <h3>✅ How much did the patient take?</h3>
+        <div class="legend" style="margin-top:0">
+          <span class="chip good">¾ or more = good</span>
+          <span class="chip watch">About half = keep an eye out</span>
+          <span class="chip flag">Half or less = tell the nurse</span>
+        </div>
+        <ul style="margin-top:10px">
+          <li>0 / ¼ / ½ / ¾ / all = none / quarter / half / three-quarters / all</li>
+          <li>Write what the patient <strong>took</strong>, not what you gave.</li>
+          <li>Half or less, several feeds in a row → tell the family or the nurse.</li>
+        </ul>
+      </div>
+
+      <div class="keybox">
+        <h3>⏰ Falling behind? Check by mid-afternoon</h3>
+        <ul>
+          <li>Add up the totals at <strong>3 pm</strong>.</li>
+          <li>Has the patient had less than about <strong>half the daily goal</strong>? Plan extra feeds before bed.</li>
+          <li>Don't wait until night to notice the patient is behind.</li>
+        </ul>
+      </div>
+
+      <div class="keybox">
+        <h3>💧 Pee colour guide</h3>
+        <div class="swatchrow"><span class="swatch u1"></span> Pale yellow — drinking enough</div>
+        <div class="swatchrow"><span class="swatch u2"></span> Light yellow — OK</div>
+        <div class="swatchrow"><span class="swatch u3"></span> Dark yellow — give more to drink</div>
+        <div class="swatchrow"><span class="swatch u4"></span> Orange — give more to drink, tell nurse</div>
+        <div class="swatchrow"><span class="swatch u5"></span> Brown — tell the nurse right away</div>
+      </div>
+
+      <div class="keybox">
+        <h3>🦠 Keeping food safe</h3>
+        <ul>
+          <li><strong>2-hour rule:</strong> don't leave food out at room temperature more than 2 hours (dairy blends, Ensure).</li>
+          <li><strong>1 hour</strong> if the food is warm.</li>
+          <li>Opened Ensure: use or put in the fridge within 4 hours; throw away after 2 days in the fridge.</li>
+          <li><strong>Never serve food the patient already ate from</strong> — throw the rest away.</li>
+          <li>Make small portions. One portion = one use. Start a timer when food leaves the fridge or is warmed.</li>
+        </ul>
+      </div>
+
+      <div class="keybox">
+        <h3>📞 When to call the nurse or doctor</h3>
+        <ul>
+          <li>the patient is peeing much less, or the pee is very dark.</li>
+          <li>the patient keeps taking half or less of feeds, or pees out more than they drink.</li>
+          <li>The 3 purple blood numbers are dropping.</li>
+          <li>Confusion, racing heart, trouble breathing, new swelling, or throwing up → call right away.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note"><strong>Why this matters:</strong> when everyone measures and writes things the same way, the notes can be trusted. That helps the nurse and doctor make good decisions for the patient.</div>
+  </div>
+</section>
+
+</main>
+
+<script>
+  const tabs = document.getElementById('tabs');
+  tabs.addEventListener('click', (e) => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>

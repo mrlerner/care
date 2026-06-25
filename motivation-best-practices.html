@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gentle Motivation — A Guide for Caregivers</title>
+<style>
+  :root {
+    --bg: #1a1614;
+    --panel: #241f1c;
+    --text: #e8ddd0;
+    --soft: #b9ab9a;
+    --accent: #d9a86c;
+    --accent-soft: #8f7a5e;
+    --rule: #3a322c;
+    --fs: 1.3rem;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    font-size: var(--fs);
+    line-height: 1.8;
+    letter-spacing: 0.2px;
+    padding: 7vh 0 14vh;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 7vw; }
+
+  .controls {
+    display: flex; gap: 0.6rem; justify-content: center;
+    margin-bottom: 4vh; flex-wrap: wrap;
+  }
+  .controls button {
+    background: var(--panel); color: var(--soft);
+    border: 1px solid var(--rule); border-radius: 999px;
+    padding: 0.5rem 1.1rem; font-family: inherit;
+    font-size: 0.8rem; letter-spacing: 0.5px; cursor: pointer;
+  }
+  .controls button:active { background: #2e2823; }
+
+  .eyebrow {
+    text-align: center; color: var(--accent-soft);
+    font-size: 0.85rem; letter-spacing: 3px;
+    text-transform: uppercase; margin-bottom: 1.6rem;
+  }
+  h1 {
+    font-size: 2.05rem; line-height: 1.3; font-weight: normal;
+    text-align: center; color: var(--text); margin: 0 0 2rem;
+  }
+  .lede {
+    color: var(--soft); font-style: italic;
+    text-align: center; margin-bottom: 3.5rem;
+  }
+
+  .core {
+    background: var(--panel); border-radius: 14px;
+    padding: 2.2rem 2rem; margin-bottom: 4rem;
+    text-align: center;
+  }
+  .core p { margin: 0; color: var(--text); font-size: 1.35rem; line-height: 1.6; }
+  .core .accent { color: var(--accent); }
+
+  .principle {
+    margin: 0 0 3.5rem; padding-top: 3rem;
+    border-top: 1px solid var(--rule);
+  }
+  .principle:first-of-type { border-top: none; padding-top: 0; }
+  .num {
+    display: inline-block; color: var(--accent-soft);
+    font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 0.6rem;
+  }
+  .principle h2 {
+    font-size: 1.4rem; font-weight: normal;
+    color: var(--accent); margin: 0 0 1.2rem; line-height: 1.4;
+  }
+  .principle p { margin: 0 0 1.2rem; }
+
+  .pull {
+    font-style: italic; border-left: 2px solid var(--accent-soft);
+    padding-left: 1.3rem; margin: 1.8rem 0; color: var(--soft);
+  }
+
+  /* say-this / not-that */
+  .says { margin: 1.8rem 0 0.5rem; }
+  .say {
+    padding: 1rem 1.2rem; border-radius: 10px; margin-bottom: 0.8rem;
+    font-size: 1.15rem; line-height: 1.55;
+  }
+  .say .tag {
+    display: block; font-size: 0.72rem; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 0.4rem;
+  }
+  .say.good { background: #1e2a1e; border-left: 3px solid #87a877; }
+  .say.good .tag { color: #9fc08e; }
+  .say.bad  { background: #2c2018; border-left: 3px solid #b07a5e; }
+  .say.bad .tag { color: #c79279; }
+  .say em { color: var(--text); font-style: italic; }
+
+  .line {
+    margin: 4rem 0; padding: 2.4rem 2rem;
+    background: var(--panel); border-radius: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .line h2 { color: var(--accent); font-weight: normal; font-size: 1.3rem; margin: 0 0 1rem; }
+  .line p { margin: 0 0 1rem; }
+  .line p:last-child { margin-bottom: 0; }
+
+  .closing {
+    margin-top: 4rem; padding: 2.6rem 2rem;
+    background: var(--panel); border-radius: 14px; text-align: center;
+  }
+  .closing .big { font-size: 1.4rem; color: var(--accent); line-height: 1.55; margin: 0; }
+
+  .footnote {
+    margin-top: 4rem; color: var(--accent-soft);
+    font-size: 0.85rem; line-height: 1.7; text-align: center; font-style: italic;
+  }
+
+  body.dim { --bg:#14110f; --panel:#1c1815; --text:#cdbfae; --soft:#9c8f7e; --accent:#bb9263; }
+  body.warm { --bg:#262019; --panel:#322a20; --text:#efe4d2; --soft:#c3b298; --accent:#e0ad6f; }
+
+  @media (max-width: 480px) {
+    :root { --fs: 1.18rem; }
+    h1 { font-size: 1.7rem; }
+    .wrap { padding: 0 8vw; }
+    .say { font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body class="dim">
+<div class="wrap">
+
+  <div class="controls" aria-label="brightness">
+    <button onclick="document.body.className='dim'">Dimmer</button>
+    <button onclick="document.body.className=''">Soft</button>
+    <button onclick="document.body.className='warm'">Warmer</button>
+    <button onclick="bigger()">Larger text</button>
+  </div>
+
+  <div class="eyebrow">For the people providing care</div>
+  <h1>Gentle motivation, without pushing</h1>
+
+  <p class="lede">How to encourage someone with severe ME/CFS to take small, safe steps forward — without the pressure that causes a crash, and without leaving them stuck in a protective shell.</p>
+
+  <div class="core">
+    <p>You don't make someone braver by pushing harder.<br>
+    You <span class="accent">shrink the risk</span> until their own good judgment is willing to take the step — then hand them the controls and keep them safe whichever way it lands.</p>
+  </div>
+
+  <div class="principle">
+    <span class="num">FIRST</span>
+    <h2>The fear is wisdom, not weakness</h2>
+    <p>When someone won't risk a little more, it isn't stubbornness. In ME/CFS, doing too much can cost weeks in bed — sometimes a lasting drop. Being cautious about that is rational. The caution has been keeping them safe.</p>
+    <p>So we don't override the fear or argue with it. We honor it — and then make the next step so small and so safe that the fear naturally relaxes. The goal is not more courage. It's a smaller bet.</p>
+  </div>
+
+  <div class="principle">
+    <span class="num">PRINCIPLE 1</span>
+    <h2>Make the risk tiny — then it's not so frightening</h2>
+    <p>Fear matches the stakes. If a "try" might cost a three-week crash, of course they'll say no. So make each step almost laughably small, and plan the recovery in advance, so the worst case is "a rough day we were ready for," not "the abyss."</p>
+    <p>You're not asking them to be brave. You're making bravery cheap.</p>
+  </div>
+
+  <div class="principle">
+    <span class="num">PRINCIPLE 2</span>
+    <h2>Make it an experiment, never a demand</h2>
+    <p>A goal can be failed — and failure brings shame, and shame makes people hide. An experiment cannot be failed. If a crash comes, that isn't failure; it's information: "Okay — that was over the line. Now we know where the line is."</p>
+    <p>Frame every step as curiosity, not achievement. This is the "trial of one" idea — gentle science, not effort. It lifts the weight that makes people freeze.</p>
+    <div class="says">
+      <div class="say good"><span class="tag">Try saying</span><em>"Want to run a tiny experiment and see what your body thinks?"</em></div>
+      <div class="say bad"><span class="tag">Instead of</span><em>"You should really try to do a bit more today."</em></div>
+    </div>
+  </div>
+
+  <div class="principle">
+    <span class="num">PRINCIPLE 3</span>
+    <h2>Hand them the controls — completely</h2>
+    <p>The step should be theirs to start, and theirs to stop. Two reasons: only they can feel the body's signals — you're guessing from the outside — and being given back a sliver of control is itself energizing for someone who has lost nearly all of it.</p>
+    <p>Every person who recovered described it from the inside: "I felt like moving my arm." Your role isn't to be the engine. It's to be the safe scaffold they climb on.</p>
+    <div class="says">
+      <div class="say good"><span class="tag">Try saying</span><em>"You're in charge of when to stop. Tell me the moment you want to rest."</em></div>
+      <div class="say bad"><span class="tag">Instead of</span><em>"Just a little more, you can do it, keep going."</em></div>
+    </div>
+  </div>
+
+  <div class="principle">
+    <span class="num">PRINCIPLE 4</span>
+    <h2>Let the data argue with the fear</h2>
+    <p>The protective loop runs on a prediction: "If I reach, I'll crash." The cure for a prediction is evidence. Keep a simple record of the little experiments — and most of them won't cause a crash. Then show it back.</p>
+    <p>Seeing "ten small tries, eight calm days after" tells a frightened body, more convincingly than any reassurance, that reaching is usually safe. (And because a crash can arrive a day or two late, the record is also how you tell a real overshoot from an unrelated bad day — so the fear stays tied to reality.)</p>
+  </div>
+
+  <div class="principle">
+    <span class="num">PRINCIPLE 5</span>
+    <h2>Honor rest exactly as much as effort</h2>
+    <p>If you only celebrate doing, you accidentally shame the resting — and then on a hard day they feel they're letting you down, and may over-do to prove something, and crash. Praise a good rest as warmly as a good step.</p>
+    <p class="pull">Staying inside the safe zone IS the win — not doing more.</p>
+    <p>When the floor is safe and rest is honorable, experimenting becomes possible, because there's nothing to lose by stopping.</p>
+  </div>
+
+  <div class="principle">
+    <span class="num">PRINCIPLE 6</span>
+    <h2>Pull with meaning — don't push with pressure</h2>
+    <p>Motivation comes from moving toward something wanted, not away from something feared. Tie a tiny step to something they value — a person, a window, a small pleasure, a taste — rather than the abstract "get better." Reaching toward something is far less draining than bracing against danger.</p>
+    <p>Hope itself is fuel. Knowing that people exactly this ill have come all the way back makes the next small reach feel worth it.</p>
+  </div>
+
+  <div class="principle">
+    <span class="num">PRINCIPLE 7</span>
+    <h2>Keep your own fear out of the room</h2>
+    <p>Anxiety is contagious. If every setback visibly frightens us, they learn that the world is dangerous and reaching is reckless. Treating a crash as expected, ordinary, and recoverable lowers the whole climate of fear.</p>
+    <p>Your calm is part of their care.</p>
+  </div>
+
+  <div class="line">
+    <h2>The line you must not cross</h2>
+    <p>Encouragement must always be able to live alongside a "no." The moment <em>"I believe you can"</em> turns into <em>"I'll be disappointed if you don't,"</em> it has become pressure — and pressure either causes a crash or quiet resistance.</p>
+    <p>Never let a word imply that wanting it enough, or thinking the right way, would make them well. They did not cause this illness, and they cannot will it away. That kind of "motivation" only adds guilt to suffering. Real encouragement lightens the load; it never adds to it.</p>
+  </div>
+
+  <div class="line">
+    <h2>And the matter of timing</h2>
+    <p>None of this applies while things are fragile. Just after a crash, or during an unstable stretch, is a time to <em>stabilize</em> — not to reach. Trying to motivate steps then erodes trust and risks harm.</p>
+    <p>The experiments come only once there's a run of steady days. And the very first "experiment" might simply be tolerating the curtain open an inch. That counts. That's the whole method in miniature.</p>
+  </div>
+
+  <div class="closing">
+    <p class="big">You're not trying to make the patient braver. You're shrinking the bet until her own good judgment says yes — handing her the dice — and making sure that whichever way it lands, she's safe, and it counts as learning.</p>
+  </div>
+
+  <p class="footnote">Grounded in ME/CFS pacing and energy-envelope research and in recovery accounts, adapted for the people who love and care for the patient. You know her best — take what fits, leave what doesn't.</p>
+
+</div>
+
+<script>
+  var step = 0;
+  function bigger() {
+    step = (step + 1) % 4;
+    var sizes = ['1.3rem','1.45rem','1.65rem','1.15rem'];
+    document.documentElement.style.setProperty('--fs', sizes[step]);
+  }
+</script>
+</body>
+</html>
