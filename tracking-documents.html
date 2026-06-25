@@ -142,8 +142,30 @@
   .printbtn { font: inherit; font-size: 12.5px; border: 1px solid var(--accent); color: var(--accent); background: #fff; padding: 7px 14px; border-radius: 8px; cursor: pointer; }
   .printbtn:hover { background: var(--accent); color: #fff; }
 
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ---------- Mobile ---------- */
+  @media (max-width: 640px) {
+    header.app { padding: 16px 16px 14px; }
+    header.app h1 { font-size: 19px; }
+    header.app p { font-size: 12.5px; }
+    .disclaimer { font-size: 11.5px; }
+    /* tab bar becomes one swipeable row instead of wrapping into many rows */
+    nav.tabs { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; gap: 2px; padding: 8px 10px; }
+    nav.tabs::-webkit-scrollbar { display: none; }
+    .tab-btn { flex: 0 0 auto; }
+    main { padding: 14px 12px 48px; }
+    .doc { padding: 16px 14px 20px; }
+    .doc-head h2 { font-size: 17px; }
+    .cards { grid-template-columns: 1fr; }
+    /* wide data tables scroll sideways inside their wrapper */
+    .table-scroll table { min-width: 580px; }
+    .card .table-scroll table { min-width: 0; }
+  }
+
   @media print {
     header.app, nav.tabs, .printbar { display: none !important; }
+    .table-scroll { overflow: visible; }
     body { background: #fff; }
     main { padding: 0; max-width: none; }
     .tab-panel { display: none !important; }
@@ -191,7 +213,6 @@
       <span class="tier-badge badge-t1">Most important</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">Date: <span class="blank"></span></span>
       <span class="field">Daily goals (the dietitian fills these in): <span class="blank sm"></span> calories · <span class="blank sm"></span> g protein · <span class="blank sm"></span> ml drink</span>
     </div>
@@ -261,7 +282,6 @@
       <span class="tier-badge badge-t1">Most important</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">Starting weight: <span class="blank sm"></span></span>
       <span class="field">Scale used: <span class="blank"></span></span>
     </div>
@@ -306,7 +326,6 @@
       <span class="tier-badge badge-t1">Most important</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">How often to do blood tests (the doctor decides): <span class="blank"></span></span>
     </div>
     <table>
@@ -355,7 +374,6 @@
       <span class="tier-badge badge-t2">Start now</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">Date: <span class="blank"></span></span>
     </div>
     <table>
@@ -389,7 +407,6 @@
       <span class="tier-badge badge-t2">Start now</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">Date: <span class="blank"></span></span>
     </div>
     <table>
@@ -427,7 +444,6 @@
       <span class="tier-badge badge-t2">Start now</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">Date: <span class="blank"></span></span>
     </div>
     <table>
@@ -480,7 +496,6 @@
       <span class="tier-badge badge-t3">Helpful</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">Date: <span class="blank"></span></span>
     </div>
     <table>
@@ -522,7 +537,6 @@
       <span class="tier-badge badge-t3">Helpful</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
       <span class="field">Week of: <span class="blank"></span></span>
     </div>
     <table>
@@ -555,7 +569,6 @@
       <span class="tier-badge badge-t3">Helpful</span>
     </div>
     <div class="fields">
-      <span class="field">Patient: <span class="blank lg"></span></span>
     </div>
     <table>
       <thead>
@@ -661,18 +674,6 @@
     </div>
     <div class="keygrid">
       <div class="keybox">
-        <h3>📏 How big are our cups? (measure once)</h3>
-        <ul>
-          <li>Feeding cup = <strong>______ ml</strong></li>
-          <li>Small cup = <strong>______ ml</strong></li>
-          <li>Mug = <strong>______ ml</strong></li>
-          <li>Syringe = <strong>______ ml</strong></li>
-          <li>Teaspoon = about 5 ml · Tablespoon = about 15 ml</li>
-        </ul>
-        <p style="font-size:11.5px; color:var(--muted); margin:8px 0 0;">Don't guess — measure each cup once and use these numbers.</p>
-      </div>
-
-      <div class="keybox">
         <h3>✅ How much did the patient take?</h3>
         <div class="legend" style="margin-top:0">
           <span class="chip good">¾ or more = good</span>
@@ -720,8 +721,32 @@
         <ul>
           <li>the patient is peeing much less, or the pee is very dark.</li>
           <li>the patient keeps taking half or less of feeds, or pees out more than they drink.</li>
+          <li><strong>The patient is unable to take their medications by themselves.</strong></li>
+          <li>Signs of dehydration (see the box below).</li>
           <li>The 3 purple blood numbers are dropping.</li>
           <li>Confusion, racing heart, trouble breathing, new swelling, or throwing up → call right away.</li>
+        </ul>
+      </div>
+
+      <div class="keybox">
+        <h3>🩹 Signs of dehydration</h3>
+        <ul>
+          <li><strong>Skin pinch:</strong> gently pinch the skin on the back of the hand or forearm. If it stays tented and is slow to fall back flat, the patient may be dehydrated.</li>
+          <li>Dry mouth, dry lips, or no tears.</li>
+          <li>Peeing much less than usual, or dark / strong-smelling pee.</li>
+          <li>Sunken eyes, headache, dizziness, or feeling very tired or confused.</li>
+          <li>Racing heart or feeling faint when sitting up.</li>
+        </ul>
+        <p style="font-size:11.5px; color:var(--muted); margin:8px 0 0;">A few of these together → push fluids and tell the nurse.</p>
+      </div>
+
+      <div class="keybox">
+        <h3>⚖️ Weight — when to call</h3>
+        <ul>
+          <li>Weigh the patient at the <strong>same time of day</strong> (best in the morning), in similar clothing, on the same scale.</li>
+          <li><strong>Sudden loss</strong> — more than about <strong>2 lb in a day</strong>, or <strong>5 lb in a week</strong> → tell the nurse. This is often fluid.</li>
+          <li><strong>Steady loss</strong> — more than about <strong>5% of body weight in a month</strong> (for a 110 lb person, that's about 5–6 lb) → tell the doctor.</li>
+          <li>Any fast, unexplained weight change → call.</li>
         </ul>
       </div>
     </div>
@@ -732,6 +757,14 @@
 </main>
 
 <script>
+  // Wrap every table so wide ones scroll horizontally on small screens
+  document.querySelectorAll('.doc table').forEach(t => {
+    const w = document.createElement('div');
+    w.className = 'table-scroll';
+    t.parentNode.insertBefore(w, t);
+    w.appendChild(t);
+  });
+
   const tabs = document.getElementById('tabs');
 
   // Is this hash id a real tab?
@@ -764,10 +797,15 @@
     if (validTab(id)) { showTab(id); window.scrollTo({ top: 0 }); }
   });
 
-  // On load -> if the URL points at a tab, open it
+  // On load -> if the URL points at a tab, open it and reveal it in the tab bar
   (function () {
     const id = location.hash.slice(1);
-    if (validTab(id)) { showTab(id); window.scrollTo({ top: 0 }); }
+    if (validTab(id)) {
+      showTab(id);
+      window.scrollTo({ top: 0 });
+      const b = document.querySelector('.tab-btn[data-tab="' + id + '"]');
+      if (b) b.scrollIntoView({ block: 'nearest', inline: 'center' });
+    }
   })();
 </script>
 </body>
