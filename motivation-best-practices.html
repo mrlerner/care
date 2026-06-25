@@ -28,6 +28,8 @@
     padding: 7vh 0 14vh;
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 7vw; }
+  .hub-back { display: inline-flex; align-items: center; gap: 6px; margin: 22px 0 0; color: var(--accent); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.3px; }
+  .hub-back:hover { text-decoration: underline; }
 
   .controls {
     display: flex; gap: 0.6rem; justify-content: center;
@@ -132,6 +134,8 @@
 </head>
 <body class="dim">
 <div class="wrap">
+
+  <a class="hub-back" href="./">← Care Hub</a>
 
   <div class="controls" aria-label="brightness">
     <button onclick="document.body.className='dim'">Dimmer</button>
