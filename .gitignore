@@ -1,0 +1,15 @@
+# This repo is the PUBLIC GitHub Pages site (mrlerner/care).
+# The erin-care folder also holds private source material (emails, .md drafts,
+# clinical notes). To prevent any of that from being published by accident,
+# we ignore EVERYTHING by default and explicitly allow only the published pages.
+#
+# To publish a NEW page: add a matching "!<filename>" line below, then commit.
+
+*
+
+!.gitignore
+!index.html
+!motivation-best-practices.html
+!prioritized-tracking-docs.html
+!stories-of-hope.html
+!tracking-documents.html
