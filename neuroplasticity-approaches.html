@@ -420,12 +420,32 @@
     if (mode) b.classList.add(mode);
   }
 
-  function toggleScript() {
-    var on = document.body.classList.toggle('script');
+  function applyMode(isScript) {
+    document.body.classList.toggle('script', !!isScript);
     document.getElementById('modeBtn').textContent =
-      on ? '← Back to the full guide' : 'Show just the words to read aloud →';
+      isScript ? '← Back to the full guide' : 'Show just the words to read aloud →';
     window.scrollTo(0, 0);
   }
+
+  function toggleScript() {
+    if (document.body.classList.contains('script')) {
+      // leaving script — step back through history if we put it there
+      if (history.state && history.state.script) { history.back(); return; }
+      history.pushState({ script: false }, '', location.pathname + location.search);
+      applyMode(false);
+    } else {
+      // entering script — add a history entry so Back returns to the full guide
+      history.pushState({ script: true }, '', '#words');
+      applyMode(true);
+    }
+  }
+
+  window.addEventListener('popstate', function () {
+    applyMode(location.hash === '#words');
+  });
+
+  // honor the URL on load (e.g. a bookmarked or shared #words link)
+  if (location.hash === '#words') applyMode(true);
 
   var step = 0;
   function bigger() {
