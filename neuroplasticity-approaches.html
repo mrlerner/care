@@ -189,6 +189,55 @@
     font-style: italic;
   }
 
+  /* two reading modes: full guide vs spoken script */
+  .mode-toggle {
+    display: block;
+    width: 100%;
+    margin: 0 0 5vh;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    border-radius: 12px;
+    padding: 0.95rem 1.2rem;
+    font-family: inherit;
+    font-size: 0.98rem;
+    letter-spacing: 0.4px;
+    cursor: pointer;
+  }
+  .mode-toggle:active { opacity: 0.85; }
+
+  .script-only { display: none; }
+  body.script .full-only { display: none; }
+  body.script .script-only { display: block; }
+
+  .script-intro {
+    color: var(--soft);
+    font-style: italic;
+    margin: 0 0 3.5rem;
+    padding: 1.1rem 1.3rem;
+    border: 1px dashed var(--rule);
+    border-radius: 10px;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .say-group { margin: 0 0 3rem; }
+  .say-label {
+    display: block;
+    color: var(--accent-soft);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1.3rem;
+  }
+  .say {
+    margin: 0 0 1.5rem;
+    padding-left: 1.2rem;
+    border-left: 2px solid var(--accent-soft);
+    color: var(--text);
+    line-height: 1.5;
+  }
+
   /* brightness modes */
   body.dim { --bg:#14110f; --panel:#1c1815; --text:#cdbfae; --soft:#9c8f7e; --accent:#bb9263; }
   body.warm { --bg:#262019; --panel:#322a20; --text:#efe4d2; --soft:#c3b298; --accent:#e0ad6f; }
@@ -206,14 +255,57 @@
   <a class="hub-back" href="./">← Care Hub</a>
 
   <div class="controls" aria-label="brightness">
-    <button onclick="document.body.className='dim'">Dimmer</button>
-    <button onclick="document.body.className=''">Soft</button>
-    <button onclick="document.body.className='warm'">Warmer</button>
+    <button onclick="setBright('dim')">Dimmer</button>
+    <button onclick="setBright('')">Soft</button>
+    <button onclick="setBright('warm')">Warmer</button>
     <button onclick="bigger()">Larger text</button>
   </div>
 
+  <button id="modeBtn" class="mode-toggle" onclick="toggleScript()">Show just the words to read aloud →</button>
+
   <div class="eyebrow">Gentle ways to calm the nervous system</div>
   <h1>Neuroplasticity approaches you can use from bed</h1>
+
+  <div class="script-only">
+    <p class="script-intro">Just the words — no background, only what to say out loud. Read one short line, then pause. Go on only if they want more. Any single line can be the whole visit.</p>
+
+    <div class="say-group">
+      <span class="say-label">If their mind is racing or anxious</span>
+      <p class="say">"You don't have to figure this out right now."</p>
+      <p class="say">"The searching is just the alarm. You can set it down."</p>
+      <p class="say">"We'll work on it later, together — not from bed today."</p>
+    </div>
+
+    <div class="say-group">
+      <span class="say-label">To settle the body</span>
+      <p class="say">"Let's make the out-breath a little longer."</p>
+      <p class="say">"Picture one calm place — just one small part of it."</p>
+      <p class="say">"Feel one nice thing. The weight of the blanket."</p>
+      <p class="say">"In your mind: 'I'm safe enough right now.'"</p>
+    </div>
+
+    <div class="say-group">
+      <span class="say-label">To rest the mind</span>
+      <p class="say">"Bring up one small good thing."</p>
+      <p class="say">"Follow a story you know by heart."</p>
+    </div>
+
+    <div class="say-group">
+      <span class="say-label">If their head hurts</span>
+      <p class="say">"That's the heavy kind of thinking. Let's put it down."</p>
+      <p class="say">"Soft thinking only — remembering, picturing."</p>
+      <p class="say">"Decisions and plans can wait. I'll hold those."</p>
+    </div>
+
+    <div class="say-group">
+      <span class="say-label">Always okay to say</span>
+      <p class="say">"A tiny bit, then rest."</p>
+      <p class="say">"You can stop me any time. 'Stop' is enough."</p>
+      <p class="say">"If anything feels worse, we stop."</p>
+    </div>
+  </div>
+
+  <div class="full-only">
 
   <p class="lede">You asked a good question about brain-retraining programs: is there anything you can do while you're still in bed and can't watch videos or listen much? Yes. The screens and audio are just the wrapping. The thing that actually does the work is small, quiet, and can be done lying down with your eyes closed.</p>
 
@@ -317,9 +409,24 @@
 
   <p class="footnote">Put together because you asked. Nothing here needs to be done today, or at all. The quiet breaths and the calm memory are the whole thing — everything else is just there for when, and if, you want it. We're right here with you.</p>
 
+  </div>
+
 </div>
 
 <script>
+  function setBright(mode) {
+    var b = document.body;
+    b.classList.remove('dim', 'warm');
+    if (mode) b.classList.add(mode);
+  }
+
+  function toggleScript() {
+    var on = document.body.classList.toggle('script');
+    document.getElementById('modeBtn').textContent =
+      on ? '← Back to the full guide' : 'Show just the words to read aloud →';
+    window.scrollTo(0, 0);
+  }
+
   var step = 0;
   function bigger() {
     step = (step + 1) % 4;
