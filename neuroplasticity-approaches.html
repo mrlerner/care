@@ -40,27 +40,6 @@
   .hub-back { display: inline-flex; align-items: center; gap: 6px; margin: 22px 0 0; color: var(--accent); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.3px; }
   .hub-back:hover { text-decoration: underline; }
 
-  /* gentle brightness control for a dark room */
-  .controls {
-    display: flex;
-    gap: 0.6rem;
-    justify-content: center;
-    margin-bottom: 5vh;
-    flex-wrap: wrap;
-  }
-  .controls button {
-    background: var(--panel);
-    color: var(--soft);
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    padding: 0.5rem 1.1rem;
-    font-family: inherit;
-    font-size: 0.8rem;
-    letter-spacing: 0.5px;
-    cursor: pointer;
-  }
-  .controls button:active { background: #2e2823; }
-
   .eyebrow {
     text-align: center;
     color: var(--accent-soft);
@@ -238,9 +217,8 @@
     line-height: 1.5;
   }
 
-  /* brightness modes */
+  /* dim palette for a dark room */
   body.dim { --bg:#14110f; --panel:#1c1815; --text:#cdbfae; --soft:#9c8f7e; --accent:#bb9263; }
-  body.warm { --bg:#262019; --panel:#322a20; --text:#efe4d2; --soft:#c3b298; --accent:#e0ad6f; }
 
   @media (max-width: 480px) {
     :root { --fs: 1.2rem; }
@@ -253,13 +231,6 @@
 <div class="wrap">
 
   <a class="hub-back" href="./">← Care Hub</a>
-
-  <div class="controls" aria-label="brightness">
-    <button onclick="setBright('dim')">Dimmer</button>
-    <button onclick="setBright('')">Soft</button>
-    <button onclick="setBright('warm')">Warmer</button>
-    <button onclick="bigger()">Larger text</button>
-  </div>
 
   <button id="modeBtn" class="mode-toggle" onclick="toggleScript()">Show just the words to read aloud →</button>
 
@@ -414,12 +385,6 @@
 </div>
 
 <script>
-  function setBright(mode) {
-    var b = document.body;
-    b.classList.remove('dim', 'warm');
-    if (mode) b.classList.add(mode);
-  }
-
   function applyMode(isScript) {
     document.body.classList.toggle('script', !!isScript);
     document.getElementById('modeBtn').textContent =
@@ -446,13 +411,6 @@
 
   // honor the URL on load (e.g. a bookmarked or shared #words link)
   if (location.hash === '#words') applyMode(true);
-
-  var step = 0;
-  function bigger() {
-    step = (step + 1) % 4;
-    var sizes = ['1.35rem','1.5rem','1.7rem','1.2rem'];
-    document.documentElement.style.setProperty('--fs', sizes[step]);
-  }
 </script>
 </body>
 </html>
