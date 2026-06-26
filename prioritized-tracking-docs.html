@@ -93,6 +93,25 @@
   .support h3 { margin: 0 0 8px; font-size: .95rem; color: var(--t3); }
   .support ul { margin: 0; padding-left: 18px; }
   .support li { margin: 6px 0; }
+  .trigger {
+    background: #fdf3f1;
+    border: 1px solid #efc9c2;
+    border-left: 3px solid var(--t1);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 10px 0 4px;
+  }
+  .trigger h4 {
+    margin: 0 0 6px;
+    font-size: .82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    color: var(--t1);
+  }
+  .trigger ul { margin: 0; padding-left: 18px; font-size: .92rem; }
+  .trigger li { margin: 4px 0; }
+  .trigger .caveat { margin: 8px 0 0; font-size: .82rem; color: var(--muted); font-style: italic; }
   .summary {
     background: var(--card);
     border: 1px solid var(--line);
@@ -130,9 +149,37 @@
     <h2><span class="badge">Tier 1</span> Hospital-trigger safety (print first)</h2>
     <p class="tier-note">These map directly to the three admission numbers in <code>hospital-triggers.md</code>.</p>
     <ol class="docs">
-      <li><span class="num">1</span><span class="docname">Daily Food &amp; Fluid Log</span> — captures intake (calories) <strong>and</strong> fluid-in / urine-out on one page; feeds the fluid-balance trigger and the nutrition picture at once. The workhorse sheet.</li>
-      <li><span class="num">2</span><span class="docname">Weight Log</span> — the weight-trend trigger; one row per weigh-in.</li>
-      <li><span class="num">3</span><span class="docname">Lab / Electrolyte Tracker</span> — the electrolyte trigger (phosphate / magnesium / potassium); a sheet to transcribe and trend blood-draw results, since these can't be measured at the bedside.</li>
+      <li><span class="num">1</span><span class="docname">Daily Food &amp; Fluid Log</span> — captures intake (calories) <strong>and</strong> fluid-in / urine-out on one page; feeds the fluid-balance trigger and the nutrition picture at once. The workhorse sheet.
+        <div class="trigger">
+          <h4>Call the doctor if</h4>
+          <ul>
+            <li><strong>Dehydration / fluid balance:</strong> urine output drops to roughly <strong>&lt;0.5 mL/kg/hr</strong> (or simply far less than prior days); <strong>Total In − Urine Out</strong> stays negative day after day; or signs of dehydration appear — dark/scant urine, dry mouth, poor skin turgor.</li>
+            <li><strong>Calories / intake:</strong> intake runs far below the daily target despite best effort across the day; she can't take <strong>any</strong> nutrition or fluid; or there's repeated vomiting.</li>
+          </ul>
+          <p class="caveat">Exact cutoffs to be set by Dr. Friedly — these are the framework ranges from <code>hospital-triggers.md</code>.</p>
+        </div>
+      </li>
+      <li><span class="num">2</span><span class="docname">Weight Log</span> — the weight-trend trigger; one row per weigh-in.
+        <div class="trigger">
+          <h4>Call the doctor if</h4>
+          <ul>
+            <li>Weight keeps <strong>falling</strong> despite feeding efforts.</li>
+            <li>Rapid loss — roughly <strong>~1–2% of body weight in a week</strong>, or <strong>~5% in a month</strong>.</li>
+            <li>A flat or falling trend even while intake <em>looks</em> adequate on paper (points to an absorption or fluid-loss problem).</li>
+          </ul>
+          <p class="caveat">It's the <em>trend</em> that triggers a call, not any single weigh-in. Exact cutoffs to be set by Dr. Friedly.</p>
+        </div>
+      </li>
+      <li><span class="num">3</span><span class="docname">Lab / Electrolyte Tracker</span> — the electrolyte trigger (phosphate / magnesium / potassium); a sheet to transcribe and trend blood-draw results, since these can't be measured at the bedside.
+        <div class="trigger">
+          <h4>Call the doctor if</h4>
+          <ul>
+            <li>Phosphate, potassium, or magnesium is <strong>falling</strong> across serial draws — especially in the 12–72h after a calorie increase (the refeeding window).</li>
+            <li>Any of the trio is <strong>severely low</strong>, or sodium is low/falling.</li>
+          </ul>
+          <p class="caveat">A downward <em>trend</em> matters even before a value is critically low. Exact cutoffs to be set by Dr. Friedly.</p>
+        </div>
+      </li>
     </ol>
     <div class="support">
       <h3>Supporting printouts for the Daily Food &amp; Fluid Log</h3>
