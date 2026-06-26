@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neuroplasticity Approaches</title>
+<style>
+  :root {
+    --bg: #1a1614;
+    --panel: #241f1c;
+    --text: #e8ddd0;
+    --soft: #b9ab9a;
+    --accent: #d9a86c;
+    --accent-soft: #8f7a5e;
+    --rule: #3a322c;
+    --fs: 1.35rem;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Iowan Old Style', 'Palatino Linotype', serif;
+    font-size: var(--fs);
+    line-height: 1.85;
+    letter-spacing: 0.2px;
+    padding: 7vh 0 14vh;
+  }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 7vw;
+  }
+
+  .hub-back { display: inline-flex; align-items: center; gap: 6px; margin: 22px 0 0; color: var(--accent); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.3px; }
+  .hub-back:hover { text-decoration: underline; }
+
+  /* gentle brightness control for a dark room */
+  .controls {
+    display: flex;
+    gap: 0.6rem;
+    justify-content: center;
+    margin-bottom: 5vh;
+    flex-wrap: wrap;
+  }
+  .controls button {
+    background: var(--panel);
+    color: var(--soft);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.5rem 1.1rem;
+    font-family: inherit;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+  }
+  .controls button:active { background: #2e2823; }
+
+  .eyebrow {
+    text-align: center;
+    color: var(--accent-soft);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 1.6rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    line-height: 1.3;
+    font-weight: normal;
+    text-align: center;
+    color: var(--text);
+    margin: 0 0 2.5rem;
+  }
+
+  .lede {
+    color: var(--soft);
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .rule-box {
+    margin: 0 0 4.5rem;
+    padding: 1.8rem 1.9rem;
+    background: var(--panel);
+    border-radius: 14px;
+    border-left: 3px solid var(--accent);
+  }
+  .rule-box .label {
+    display: block;
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .rule-box p { margin: 0 0 1rem; }
+  .rule-box p:last-child { margin-bottom: 0; }
+
+  .section { margin: 0 0 4.5rem; padding-top: 3.5rem; border-top: 1px solid var(--rule); }
+
+  .section h2 {
+    font-size: 1.45rem;
+    font-weight: normal;
+    color: var(--accent);
+    margin: 0 0 0.4rem;
+    line-height: 1.4;
+  }
+  .section .sub { color: var(--soft); font-style: italic; margin: 0 0 2rem; font-size: 0.95rem; }
+  .section > p { margin: 0 0 1.4rem; }
+
+  .practices { margin: 1.5rem 0 0; padding: 0; list-style: none; }
+  .practices li {
+    margin: 0 0 1.8rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .practices li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--accent-soft);
+  }
+  .practices strong { color: var(--accent); font-weight: normal; }
+
+  /* prioritized resources */
+  .res {
+    margin: 0 0 1.6rem;
+    padding: 1.5rem 1.7rem;
+    background: var(--panel);
+    border-radius: 12px;
+    border: 1px solid var(--rule);
+  }
+  .res.top { border-color: var(--accent-soft); border-left: 3px solid var(--accent); }
+  .res .rank {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  .res h3 { font-size: 1.2rem; font-weight: normal; color: var(--text); margin: 0 0 0.7rem; line-height: 1.4; }
+  .res p { margin: 0 0 0.8rem; font-size: 0.98rem; }
+  .res p:last-child { margin-bottom: 0; }
+  .res .tag {
+    display: inline-block;
+    font-size: 0.78rem;
+    letter-spacing: 0.4px;
+    color: var(--soft);
+    background: #2e2823;
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    margin: 0.2rem 0.4rem 0.2rem 0;
+  }
+  .res a { color: var(--accent); word-break: break-word; }
+
+  .caveat {
+    margin-top: 4.5rem;
+    padding: 1.8rem 1.9rem;
+    background: var(--panel);
+    border-radius: 14px;
+    border-left: 3px solid var(--accent-soft);
+  }
+  .caveat .label {
+    display: block;
+    color: var(--accent);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.9rem;
+  }
+  .caveat p { margin: 0 0 1rem; color: var(--soft); }
+  .caveat p:last-child { margin-bottom: 0; }
+
+  .footnote {
+    margin-top: 5rem;
+    color: var(--accent-soft);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* brightness modes */
+  body.dim { --bg:#14110f; --panel:#1c1815; --text:#cdbfae; --soft:#9c8f7e; --accent:#bb9263; }
+  body.warm { --bg:#262019; --panel:#322a20; --text:#efe4d2; --soft:#c3b298; --accent:#e0ad6f; }
+
+  @media (max-width: 480px) {
+    :root { --fs: 1.2rem; }
+    h1 { font-size: 1.8rem; }
+    .wrap { padding: 0 8vw; }
+  }
+</style>
+</head>
+<body class="dim">
+<div class="wrap">
+
+  <a class="hub-back" href="./">← Care Hub</a>
+
+  <div class="controls" aria-label="brightness">
+    <button onclick="document.body.className='dim'">Dimmer</button>
+    <button onclick="document.body.className=''">Soft</button>
+    <button onclick="document.body.className='warm'">Warmer</button>
+    <button onclick="bigger()">Larger text</button>
+  </div>
+
+  <div class="eyebrow">Gentle ways to calm the nervous system</div>
+  <h1>Neuroplasticity approaches you can use from bed</h1>
+
+  <p class="lede">Mike mentioned brain-retraining programs, and you asked a good question: is there anything you can do while you're still in bed and can't watch videos or listen much? Yes. The screens and audio are just the wrapping. The thing that actually does the work is small, quiet, and can be done lying down with your eyes closed.</p>
+
+  <div class="rule-box">
+    <span class="label">The one rule that comes first</span>
+    <p>Thinking, feeling, and even listening all use the same energy as moving. They can bring on a crash the same way. So every single thing on this page is meant to be tiny — a few seconds to a minute or two — and then you stop and rest.</p>
+    <p>Stop <em>before</em> you feel tired, not after. The nervous system learns calm from gentleness and repetition, never from effort. If something makes you feel worse, you let it go — no guilt, no pushing. This is the opposite of "try harder."</p>
+  </div>
+
+  <div class="section">
+    <h2>Things you can do with your eyes closed</h2>
+    <p class="sub">No screen, no sound. Pick one. A few seconds is plenty.</p>
+    <ul class="practices">
+      <li><strong>Slow it down on the out-breath.</strong> A few breaths where you let the out-breath be a little longer than the in-breath. This is the most direct way to tell your body it's safe to rest. Even three or four breaths count — this is the foundation under every program.</li>
+      <li><strong>Visit one calm memory.</strong> Bring to mind one peaceful moment and rest in a single detail of it — warmth of the sun, a soft texture, a familiar smell. This gentle picturing <em>is</em> the core tool inside the big programs, just without the course around it.</li>
+      <li><strong>Rest your attention on one kind sensation.</strong> The weight of the blanket, a spot of warmth, the quiet rise and fall of your breath. Notice it with a little curiosity, rather than scanning for what's wrong.</li>
+      <li><strong>A quiet phrase, said only in your mind.</strong> Something like <em>"I'm safe enough right now. This moment is okay."</em> A soft way to interrupt the alarm when worry rises. Nothing to hear, nothing to read.</li>
+      <li><strong>One small thank-you.</strong> Bring to mind one small good thing — a person, a sip of water, a moment of quiet. Just a flicker. Then let it go.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>If a little sound feels okay one day</h2>
+    <p class="sub">Only on a good moment — and you can stop at any second.</p>
+    <p>If listening is bearable for a short while, a very short guided practice with a soft voice, eyes closed, can do the same work — as long as you can pause or stop the instant it's too much. The Curable and Gupta programs both have brief audio meditations. Treat this as completely optional; the silent practices above are enough on their own.</p>
+  </div>
+
+  <div class="section">
+    <h2>Resources, in order — for when you or the people helping you are ready to look further</h2>
+    <p class="sub">Most of these are built around video and audio, so they're for later or for your helpers to explore. Mike's link is first.</p>
+
+    <div class="res top">
+      <span class="rank">Start here — Mike's link</span>
+      <h3>DNRS — Dynamic Neural Retraining System (retrainingthebrain.com)</h3>
+      <p>This is the program Mike sent. It's the best-known neuroplasticity program for illnesses like this. The course itself is on video, so it's for when watching is possible again — but the practice it teaches is exactly the calm-picturing and interrupt-the-alarm steps above.</p>
+      <p><span class="tag">Needs video to start</span> <span class="tag">Practice is silent</span></p>
+      <p><a href="https://retrainingthebrain.com/the-program#program-options">retrainingthebrain.com/the-program</a></p>
+    </div>
+
+    <div class="res">
+      <span class="rank">Most relevant to where you are</span>
+      <h3>Primal Trust (Cathleen King)</h3>
+      <p>Worth knowing about because Cathleen King had severe ME/CFS herself, and the program speaks directly to people who are bedbound — its whole philosophy is "regulate the nervous system first, and keep every practice tiny." Still video-based, but the spirit matches your reality better than most.</p>
+      <p><span class="tag">Video-based</span> <span class="tag">Severe-aware</span></p>
+      <p><a href="https://www.primaltrust.org/">primaltrust.org</a></p>
+    </div>
+
+    <div class="res">
+      <span class="rank">Has short audio</span>
+      <h3>Gupta Program</h3>
+      <p>Similar internal approach to DNRS, with some short audio meditations that can be used in small doses on a tolerable day.</p>
+      <p><span class="tag">Video + short audio</span></p>
+      <p><a href="https://www.guptaprogram.com/">guptaprogram.com</a></p>
+    </div>
+
+    <div class="res">
+      <span class="rank">Free, written</span>
+      <h3>ANS Rewire</h3>
+      <p>A structured program with a strong written component, which can be easier than video when reading in short bursts is possible. Built specifically around ME/CFS and pacing.</p>
+      <p><span class="tag">Mostly written</span> <span class="tag">ME/CFS-specific</span></p>
+      <p><a href="https://www.cfsrecovery.com.au/">cfsrecovery.com.au (ANS Rewire)</a></p>
+    </div>
+
+    <div class="res">
+      <span class="rank">Simple app, for later</span>
+      <h3>Curable</h3>
+      <p>A phone app built around short audio exercises and "somatic tracking" — gently noticing sensations with curiosity instead of fear. Designed for pain, but the calming tools transfer. Best for a later stage when a little screen and audio are manageable.</p>
+      <p><span class="tag">App · short audio</span></p>
+      <p><a href="https://www.curablehealth.com/">curablehealth.com</a></p>
+    </div>
+  </div>
+
+  <div class="caveat">
+    <span class="label">One honest note</span>
+    <p>These approaches are genuinely debated among people with ME/CFS. Some find them calming and helpful; others dislike the "it's your brain" framing, and there's a real risk if a program ever nudges someone to push past their limits to "retrain faster."</p>
+    <p>So the safe version, for you, is simple: a gentle experiment that lives entirely inside your energy envelope. Never a replacement for rest, pacing, your medical care, or nutrition — and dropped the moment it costs more than it gives.</p>
+  </div>
+
+  <p class="footnote">Put together because you asked. Nothing here needs to be done today, or at all. The quiet breaths and the calm memory are the whole thing — everything else is just there for when, and if, you want it. We're right here with you.</p>
+
+</div>
+
+<script>
+  var step = 0;
+  function bigger() {
+    step = (step + 1) % 4;
+    var sizes = ['1.35rem','1.5rem','1.7rem','1.2rem'];
+    document.documentElement.style.setProperty('--fs', sizes[step]);
+  }
+</script>
+</body>
+</html>
