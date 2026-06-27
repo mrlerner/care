@@ -106,6 +106,7 @@
   .write { background: repeating-linear-gradient(transparent, transparent 32px, var(--line) 33px); }
   tr.checkpoint td { background: var(--watch-soft); font-weight: 600; }
   tr.totals td { background: var(--accent-soft); font-weight: 700; }
+  td.fill, tr.totals td.fill { background: #fff; box-shadow: inset 0 0 0 2px var(--accent); border-radius: 4px; }
   th.refeed, td.refeed { background: var(--refeed-soft); }
   thead th.refeed { background: #e2d4f0; color: var(--refeed); }
 
@@ -135,8 +136,8 @@
   .keybox li { margin-bottom: 6px; }
   .swatchrow { display: flex; align-items: center; gap: 8px; margin-bottom: 7px; font-size: 12.5px; }
   .swatch { width: 26px; height: 16px; border-radius: 4px; flex: none; border: 1px solid rgba(0,0,0,.12); }
-  .u1 { background: #f5e9b8; } .u2 { background: #e9d579; } .u3 { background: #d9b441; }
-  .u4 { background: #c08a1e; } .u5 { background: #8c5a12; }
+  .u1 { background: #f9f4b8; } .u2 { background: #f1e177; } .u3 { background: #e8cd44; }
+  .u4 { background: #d9a82c; } .u5 { background: #c2801d; } .u6 { background: #9f6018; } .u7 { background: #794214; }
 
   .tickcell { text-align: center; font-size: 15px; color: var(--line-strong); }
 
@@ -182,7 +183,7 @@
 <body>
 
 <header class="app">
-  <a class="hub-back" href="./">← Care Hub</a>
+  <a class="hub-back" href="index.html">← Care Hub</a>
   <h1>Daily Care Forms</h1>
   <p>Simple forms for the patient's caregivers. Fill them in by hand. Each form tells you what to do — there is no math, and you can't go wrong by writing things down.</p>
   <div class="disclaimer">⚠️ These are organizing forms — <strong>not medical advice</strong>. The doctor and dietitian decide the patient's food amounts and any medicine changes. Important: do not increase food amounts quickly — the doctor sets how fast to add calories.</div>
@@ -211,19 +212,16 @@
     <div class="doc-head">
       <div>
         <h2>Food &amp; Drink Log</h2>
-        <p class="sub">Use one page each day. Write one line every time you feed the patient. Also write down how much the patient pees. Add everything up at the bottom.</p>
       </div>
       <span class="tier-badge badge-t1">Most important</span>
     </div>
     <div class="fields">
       <span class="field">Date: <span class="blank"></span></span>
-      <span class="field">Day of week: <span class="blank sm"></span></span>
-      <span class="field">Who is on shift (initials): <span class="blank sm"></span></span>
     </div>
     <div class="fields">
       <span class="field"><strong>Daily goals:</strong> about <strong>1,500 ml drink</strong> (≈ 51 oz) · <strong>60+ g protein</strong> · <span class="blank sm"></span> calories <em>(dietitian fills in)</em></span>
     </div>
-    <p class="sub" style="margin:6px 0 0">More drink is better. Focus on electrolytes + protein drinks. The family set the drink and protein goals for now — the dietitian can change them.</p>
+    <p class="sub" style="margin:6px 0 0">More drink is better. Focus on electrolytes + protein drinks.</p>
     <div class="note warn"><strong>Pushing protein and calories: watch the patient's heart rate and go slow.</strong> Do not increase amounts quickly — the doctor / dietitian decides how fast to add calories.</div>
     <div class="note"><strong>Start of every morning (8 am) shift — make the two electrolyte drinks:</strong>
       <span style="display:block;margin-top:5px">1) <strong>Yellow mug (14 oz ≈ 415 ml):</strong> water + <strong>½ pack electrolytes</strong> + <strong>1 cap MiraLAX</strong> + <strong>1–2 tsp acacia fiber</strong>.</span>
@@ -257,7 +255,7 @@
         <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
         <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
         <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr class="totals"><td colspan="5">DAY TOTALS</td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
+        <tr class="totals"><td colspan="5">DAY TOTALS</td><td class="num fill"></td><td class="num fill"></td><td class="num fill"></td><td class="fill"></td></tr>
       </tbody>
     </table>
 
@@ -789,12 +787,14 @@
       </div>
 
       <div class="keybox">
-        <h3>💧 Pee colour guide</h3>
-        <div class="swatchrow"><span class="swatch u1"></span> Pale yellow — drinking enough</div>
-        <div class="swatchrow"><span class="swatch u2"></span> Light yellow — OK</div>
-        <div class="swatchrow"><span class="swatch u3"></span> Dark yellow — give more to drink</div>
-        <div class="swatchrow"><span class="swatch u4"></span> Orange — give more to drink, tell nurse</div>
-        <div class="swatchrow"><span class="swatch u5"></span> Brown — tell the nurse right away</div>
+        <h3>💧 Pee colour guide (1–7)</h3>
+        <div class="swatchrow"><span class="swatch u1"></span> <strong>1</strong> — pale, drinking enough</div>
+        <div class="swatchrow"><span class="swatch u2"></span> <strong>2</strong> — light yellow, OK</div>
+        <div class="swatchrow"><span class="swatch u3"></span> <strong>3</strong> — yellow, OK</div>
+        <div class="swatchrow"><span class="swatch u4"></span> <strong>4</strong> — dark yellow, push fluids</div>
+        <div class="swatchrow"><span class="swatch u5"></span> <strong>5</strong> — amber, tell the nurse</div>
+        <div class="swatchrow"><span class="swatch u6"></span> <strong>6</strong> — orange-brown, tell the nurse</div>
+        <div class="swatchrow"><span class="swatch u7"></span> <strong>7</strong> — brown, tell the nurse right away</div>
       </div>
 
       <div class="keybox">
