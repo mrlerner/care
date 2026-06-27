@@ -108,6 +108,7 @@
   tr.checkpoint td { background: var(--watch-soft); font-weight: 600; }
   tr.totals td { background: var(--accent-soft); font-weight: 700; }
   td.fill, tr.totals td.fill { background: #fff; box-shadow: inset 0 0 0 2px var(--accent); border-radius: 4px; }
+  tr.checkpoint td.fill { background: var(--watch-soft); }
   th.refeed, td.refeed { background: var(--refeed-soft); }
   thead th.refeed { background: #e2d4f0; color: var(--refeed); }
 
@@ -231,58 +232,57 @@
       <thead>
         <tr>
           <th style="width:7%">Time</th>
-          <th style="width:23%">What you gave (food / drink)</th>
-          <th class="num" style="width:9%">Amount given (ml)</th>
-          <th class="num" style="width:13%">How much the patient took (0 / ¼ / ½ / ¾ / all)</th>
-          <th class="num" style="width:9%">ml taken</th>
-          <th class="num" style="width:8%">Calories</th>
-          <th class="num" style="width:8%">Protein (g)</th>
-          <th class="num" style="width:10%">Total drink so far (ml)</th>
-          <th class="num" style="width:7%">Initials</th>
+          <th style="width:26%">What you gave (food / drink)</th>
+          <th class="num" style="width:11%">Amount given (ml)</th>
+          <th class="num" style="width:15%">How much the patient took (0 / ¼ / ½ / ¾ / all)</th>
+          <th class="num" style="width:11%">Liquid taken (ml)</th>
+          <th class="num" style="width:10%">Calories</th>
+          <th class="num" style="width:10%">Protein (g)</th>
+          <th class="num" style="width:10%">Initials</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr class="checkpoint"><td>3 pm</td><td colspan="4">3 PM CHECK — add up so far. Has the patient had less than about half the daily goal? Plan extra feeds before bed.</td><td class="num"></td><td class="num"></td><td class="num"></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        <tr class="totals"><td colspan="5">DAY TOTALS</td><td class="num fill"></td><td class="num fill"></td><td class="num fill"></td><td class="fill"></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr class="checkpoint"><td>3 pm</td><td colspan="3">3 PM CHECK — add up so far. Has the patient had less than about half the daily goal? Plan extra feeds before bed.</td><td class="num fill"></td><td class="num fill"></td><td class="num fill"></td><td class="fill"></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        <tr class="totals"><td colspan="4">DAY TOTALS</td><td class="num fill"></td><td class="num fill"></td><td class="num fill"></td><td class="fill"></td></tr>
       </tbody>
     </table>
 
     <h3 style="font-size:15px; margin:22px 0 8px;">Diaper Changes</h3>
-    <p class="sub" style="margin:0 0 8px"><strong>Every change:</strong> tick light or heavy for the wet pad, and circle the poop type or tick vomit.</p>
+    <p class="sub" style="margin:0 0 8px"><strong>Every change:</strong> tick light or heavy for the wet pad, and circle the BM type or tick vomit.</p>
     <div class="note"><strong>Diaper care:</strong> use barrier cream on a wipe at the end of each change. We may be using UltraSorb pads instead — <strong>please ask their preference.</strong></div>
 
     <table>
       <thead>
-        <tr><th style="width:10%">Time</th><th class="num" style="width:11%">Wet —<br>light</th><th class="num" style="width:11%">Wet —<br>heavy</th><th class="num" style="width:22%">Poop? circle<br>F&nbsp;·&nbsp;L&nbsp;·&nbsp;W</th><th class="num" style="width:11%">Vomit</th><th class="num" style="width:14%">Pee (ml)<br>weigh-day only</th><th class="num" style="width:11%">Initials</th></tr>
+        <tr><th style="width:10%">Time</th><th class="num" style="width:11%">Wet —<br>light</th><th class="num" style="width:11%">Wet —<br>heavy</th><th class="num" style="width:26%">BM? circle one<br>Formed · Loose · Watery</th><th class="num" style="width:10%">Vomit</th><th class="num" style="width:12%">Pee (ml)<br>weigh-day only</th><th class="num" style="width:10%">Initials</th></tr>
       </thead>
       <tbody>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; letter-spacing:1px;">F · L · W</td><td class="tickcell">▢</td><td></td><td></td></tr>
-        <tr class="totals"><td>DAY TOTALS</td><td colspan="6">Wet diapers today: <strong>____</strong> (her normal ≈ ____) &nbsp;·&nbsp; Watery stools: <strong>____</strong> &nbsp;·&nbsp; Vomits: <strong>____</strong></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr><td></td><td class="tickcell">▢</td><td class="tickcell">▢</td><td style="text-align:center; font-size:12px;">Formed · Loose · Watery</td><td class="tickcell">▢</td><td></td><td></td></tr>
+        <tr class="totals"><td>DAY TOTALS</td><td colspan="6">Wet diapers today: <strong>____</strong> (her normal ≈ ____) &nbsp;·&nbsp; Watery BMs: <strong>____</strong> &nbsp;·&nbsp; Vomits: <strong>____</strong></td></tr>
       </tbody>
     </table>
-    <div class="note"><strong>Poop:</strong> circle <strong>F</strong> = formed / solid · <strong>L</strong> = loose · <strong>W</strong> = watery. Watery poop or vomiting loses a lot of fluid fast — count them in the day totals and tell the nurse.</div>
-    <div class="note warn"><strong>Weigh-day only</strong> (the nurse will say which days): weigh <em>every</em> diaper for the whole 24 hours. Subtract the dry pad weight — <strong>1 gram = 1 ml</strong>. If there is <strong>formed (solid) poop</strong>, drop it in the toilet or trash first, then weigh the pad. If the poop is <strong>watery</strong>, you can't weigh it — estimate the pee from her other diapers and circle W.</div>
+    <div class="note"><strong>BM:</strong> circle <strong>Formed</strong>, <strong>Loose</strong>, or <strong>Watery</strong>. A <strong>watery</strong> BM (or vomiting) loses a lot of fluid fast — count watery BMs in the day totals and tell the nurse. Some softness is expected with the MiraLAX; it's the <strong>frankly watery</strong> stool that matters for dehydration.</div>
+    <div class="note warn"><strong>Weigh-day only</strong> (the nurse will say which days): weigh <em>every</em> diaper for the whole 24 hours. Subtract the dry pad weight — <strong>1 gram = 1 ml</strong>. If there is <strong>formed (solid) stool</strong>, drop it in the toilet or trash first, then weigh the pad. If the BM is <strong>watery</strong>, you can't weigh it — estimate the pee from her other diapers and circle Watery.</div>
 
     <div class="legend">
       <span class="chip good">Took ¾ or more = good</span>
