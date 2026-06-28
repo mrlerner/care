@@ -129,6 +129,8 @@
   .card { border: 1px solid var(--line); border-radius: 10px; padding: 16px; background: #fcfdfe; }
   .card h3 { margin: 0 0 4px; font-size: 15px; }
   .card .blendmeta { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+  .commcard { border-left: 3px solid var(--accent); }
+  .commcard table td { padding: 7px 9px; }
   .card table { font-size: 13px; }
   .density { margin-top: 10px; font-weight: 700; color: var(--accent); font-size: 14px; background: var(--accent-soft); padding: 8px 10px; border-radius: 7px; text-align: center; }
 
@@ -174,6 +176,7 @@
     .tab-panel.active { display: block !important; }
     .doc { box-shadow: none; border: none; padding: 0; }
     .doc + .doc { page-break-before: always; }
+    .card { break-inside: avoid; }
     h2, h3 { break-after: avoid; }
     tbody tr { height: 34px; }
     @page { margin: 14mm; }
@@ -195,8 +198,9 @@
   <button class="tab-btn" data-tab="repos"><span class="tier-dot t2"></span>Turning</button>
   <button class="tab-btn" data-tab="meds"><span class="tier-dot t2"></span>Medicines</button>
   <button class="tab-btn" data-tab="exertion"><span class="tier-dot t3"></span>Activity</button>
-  <button class="tab-btn" data-tab="hygiene"><span class="tier-dot t3"></span>Weekly Cleaning</button>
+  <button class="tab-btn" data-tab="hygiene"><span class="tier-dot t3"></span>Personal Care</button>
   <button class="tab-btn" data-tab="crash"><span class="tier-dot t3"></span>Crash Log</button>
+  <button class="tab-btn" data-tab="commcards"><span class="tier-dot" style="background:var(--accent)"></span>Crash Cards</button>
   <button class="tab-btn" data-tab="recipes"><span class="tier-dot" style="background:var(--accent)"></span>Recipe Cards</button>
   <button class="tab-btn" data-tab="key"><span class="tier-dot" style="background:var(--accent)"></span>Quick Guide</button>
 </nav>
@@ -441,7 +445,7 @@
         <tr><td>04:00</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td></td><td></td><td></td></tr>
       </tbody>
     </table>
-    <div class="note"><strong>Don't leave a row empty.</strong> If you skipped a turn — for example, the patient couldn't handle being moved — write why in Notes.</div>
+    <div class="note"><strong>Don't leave a row empty.</strong> If you skipped a turn — for example, the patient couldn't handle being moved — write why in Notes. Once a day, also do the fuller skin check on the <a href="#hygiene" style="color:var(--accent)">Comfort &amp; Personal Care</a> form.</div>
   </div>
 </section>
 
@@ -544,8 +548,8 @@
   <div class="doc">
     <div class="doc-head">
       <div>
-        <h2>Weekly Cleaning &amp; Comfort Checklist</h2>
-        <p class="sub">Once a week. Tick the day you do each task and add your initials. Includes planned time with the neck brace, eye mask, and earplugs OFF.</p>
+        <h2>Comfort &amp; Personal Care</h2>
+        <p class="sub">Tick the box on the day each task is done, and add your initials. <strong>Daily</strong> tasks get a tick every day; <strong>weekly</strong> tasks just once in the week. The brace, mask, and earplugs come off on purpose during planned breaks.</p>
       </div>
       <span class="tier-badge badge-t3">Helpful</span>
     </div>
@@ -554,9 +558,14 @@
     </div>
     <table>
       <thead>
-        <tr><th style="width:26%">Task</th><th class="num">Mon</th><th class="num">Tue</th><th class="num">Wed</th><th class="num">Thu</th><th class="num">Fri</th><th class="num">Sat</th><th class="num">Sun</th></tr>
+        <tr><th style="width:34%">Task</th><th class="num">Mon</th><th class="num">Tue</th><th class="num">Wed</th><th class="num">Thu</th><th class="num">Fri</th><th class="num">Sat</th><th class="num">Sun</th></tr>
       </thead>
       <tbody>
+        <tr class="checkpoint"><td colspan="8">Each day</td></tr>
+        <tr><td>Mouth &amp; teeth care</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Skin check — look at heels, tailbone &amp; elbows for redness</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr><td>Wash / freshen up (sponge bath)</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
+        <tr class="checkpoint"><td colspan="8">Each week</td></tr>
         <tr><td>Change &amp; wash bedding</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
         <tr><td>Change shirt</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
         <tr><td>Change pillowcases</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
@@ -566,7 +575,7 @@
         <tr><td>Other: __________</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td><td class="tickcell">▢</td></tr>
       </tbody>
     </table>
-    <div class="note"><strong>Taking the brace, mask, and earplugs off is planned on purpose.</strong> Tick it so we can see it's really happening. Add your initials each time.</div>
+    <div class="note"><strong>The daily skin check is the safety net for pressure sores.</strong> Turning often (see the <a href="#repos" style="color:var(--accent)">Turning Chart</a>) is what prevents them; this daily look at the skin is how you catch any redness early if turning has been hard to keep up. Taking the brace, mask, and earplugs off is planned on purpose — tick it so we can see it's really happening.</div>
   </div>
 </section>
 
@@ -595,6 +604,87 @@
       </tbody>
     </table>
     <div class="note warn"><strong>For a crash, let the patient rest in a quiet, dark room.</strong> But if the patient seems very sick — confused, heart racing, trouble breathing, or throwing up — call the nurse or doctor right away.</div>
+  </div>
+</section>
+
+<!-- ================= CRASH / COMMUNICATION CARDS ================= -->
+<section class="tab-panel" id="commcards">
+  <div class="printbar"><button class="printbtn" onclick="window.print()">🖨 Print these cards</button></div>
+  <div class="doc">
+    <div class="doc-head">
+      <div>
+        <h2>Crash &amp; Communication Cards</h2>
+        <p class="sub">For the hardest hours — a crash, or any time the patient can't talk, open her eyes, or ask for what she needs. Print, cut out, and keep the first three by the bed. The patient can point or look at an item; a caregiver can read them in seconds. Fill the blanks in pen for this patient.</p>
+      </div>
+      <span class="tier-badge badge-ref">Print &amp; cut out</span>
+    </div>
+    <div class="note"><strong>Not being able to speak does not mean she can't hear or feel.</strong> Assume she understands everything. Talk gently, tell her before you touch her, and use these cards to let her answer without words.</div>
+    <div class="cards">
+
+      <div class="card commcard">
+        <h3>① What I need right now</h3>
+        <div class="blendmeta">She points to or looks at one. Read them aloud slowly, one at a time, and watch for a yes.</div>
+        <table>
+          <tbody>
+            <tr><td class="tickcell">▢</td><td>Water / a mouth swab — my mouth is dry</td></tr>
+            <tr><td class="tickcell">▢</td><td>Please turn / reposition me</td></tr>
+            <tr><td class="tickcell">▢</td><td>Too bright — dim the light</td></tr>
+            <tr><td class="tickcell">▢</td><td>Too loud — quiet, please</td></tr>
+            <tr><td class="tickcell">▢</td><td>I'm in pain</td></tr>
+            <tr><td class="tickcell">▢</td><td>I feel sick / nauseous</td></tr>
+            <tr><td class="tickcell">▢</td><td>I need changing</td></tr>
+            <tr><td class="tickcell">▢</td><td>I'm too hot / too cold</td></tr>
+            <tr><td class="tickcell">▢</td><td>Please just be still and stay</td></tr>
+            <tr><td class="tickcell">▢</td><td>Please leave me to rest</td></tr>
+            <tr><td class="tickcell">▢</td><td>Other: ____________________</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card commcard">
+        <h3>② Please — for the room</h3>
+        <div class="blendmeta">For anyone coming in. Read before you open the door.</div>
+        <table>
+          <tbody>
+            <tr><td class="tickcell">▢</td><td>Knock softly — don't just walk in</td></tr>
+            <tr><td class="tickcell">▢</td><td>Keep the light low / leave it off</td></tr>
+            <tr><td class="tickcell">▢</td><td>Speak quietly and slowly</td></tr>
+            <tr><td class="tickcell">▢</td><td>Tell me before you touch me</td></tr>
+            <tr><td class="tickcell">▢</td><td>Do everything in one visit, then let me rest (cluster care)</td></tr>
+            <tr><td class="tickcell">▢</td><td>No perfume, scented lotion, or strong smells</td></tr>
+            <tr><td class="tickcell">▢</td><td>Leave my eye mask, earplugs &amp; neck brace as they are</td></tr>
+            <tr><td class="tickcell">▢</td><td>One person in the room at a time</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card commcard">
+        <h3>③ My comfort settings</h3>
+        <div class="blendmeta">How she likes things by default. Fill in for this patient.</div>
+        <table>
+          <tbody>
+            <tr><td>Light</td><td>____________________</td></tr>
+            <tr><td>Sound</td><td>____________________</td></tr>
+            <tr><td>Best position</td><td>____________________</td></tr>
+            <tr><td>Blanket / fan</td><td>____________________</td></tr>
+            <tr><td>Mouth care</td><td>____________________</td></tr>
+            <tr><td>What soothes me</td><td>____________________</td></tr>
+            <tr><td>What to avoid</td><td>____________________</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card commcard">
+        <h3>④ If you're new to caring for me</h3>
+        <div class="blendmeta">Tape this one where a new helper will see it.</div>
+        <p style="font-size:13.5px; margin:0 0 8px;">I have <strong>severe ME/CFS</strong>. I may not be able to talk, open my eyes, or move much. <strong>I can still hear and feel everything.</strong></p>
+        <p style="font-size:13.5px; margin:0 0 8px;">Exertion — even light, sound, or being moved too fast — can make me much worse for days. So please go slow, keep it dark and quiet, warn me before you touch me, and group your tasks into as few visits as you can.</p>
+        <p style="font-size:13.5px; margin:0 0 8px;"><strong>A crash</strong> (a big drop in how I'm doing) needs rest in a dark, quiet room — not the hospital.</p>
+        <p style="font-size:13.5px; margin:0;"><strong>But call the nurse / doctor right away</strong> if I'm confused, my heart is racing, I can't breathe well, or I'm throwing up. Nurse / family to call: ____________________</p>
+      </div>
+
+    </div>
+    <div class="note warn"><strong>Keep cards ①–③ within her reach or pointing distance.</strong> On a good day, sit with her and fill in the blanks together so they truly say what she'd want said.</div>
   </div>
 </section>
 

@@ -104,9 +104,26 @@
   .summary h2 { margin: 0 0 10px; font-size: 1.15rem; }
   .summary p { margin: 0 0 8px; }
   .summary .next { margin-top: 12px; font-style: italic; color: var(--muted); }
+  .passport, .grabsheet {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--core);
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin: 14px 0;
+  }
+  .pp-row, .gs-line { display: flex; gap: 14px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  .pp-row:last-child, .gs-line:last-child { border-bottom: 0; }
+  .pp-k, .gs-k { flex: 0 0 32%; font-weight: 700; font-size: .9rem; color: var(--ink); }
+  .pp-v { font-size: .92rem; color: var(--muted); }
+  .gs-b { flex: 1; border-bottom: 1px solid var(--line-strong, #9fb0bf); min-height: 20px; font-size: .85rem; color: var(--muted); font-style: italic; }
+  @media (max-width: 560px) {
+    .pp-row, .gs-line { flex-direction: column; gap: 3px; }
+    .pp-k, .gs-k { flex: none; }
+  }
   @media print {
     body { background:#fff; }
-    .card, .summary { box-shadow:none; break-inside: avoid; }
+    .card, .summary, .passport, .grabsheet { box-shadow:none; break-inside: avoid; }
   }
 </style>
 </head>
@@ -174,6 +191,7 @@
     <div class="card coord">
       <h3>Transport</h3>
       <p>Overlooked and important — a lights-and-sirens ambulance is itself a PEM trigger. For a direct admit, ask about <strong>non-emergency medical transport</strong> (a gurney van) so she travels lying flat, quiet, no sirens. For a true emergency, tell EMS up front about the sensory needs.</p>
+      <p style="font-size:.9rem; color:var(--muted); margin-top:8px;">#MEAction's free <a href="https://www.meaction.net/gurney-guide/" style="color:var(--accent)">Gurney Guide to severe ME transportation</a> walks through how to move a severely ill person to hospital with the least harm — worth reading before you need it.</p>
     </div>
     <div class="card coord">
       <h3>Staying with her</h3>
@@ -181,7 +199,21 @@
     </div>
   </div>
 
-  <h2 class="sec" style="margin-top:30px">If accommodations slip — escalate</h2>
+  <h2 class="sec" style="margin-top:34px">A card that travels with her — the "hospital passport"</h2>
+  <p class="sub">UK ME charities (the 25% ME Group, Action for M.E. and the ME Association) give patients a one-page <strong>hospital passport</strong>: a card kept with the patient and her chart that states her needs at a glance, so every new shift, nurse, and porter sees them without being briefed. Fill this in privately with real details, print it, and tape a copy to the head of the bed and inside the chart. (It mirrors the accommodations letter — the letter persuades; the card is the bedside reminder.)</p>
+  <div class="passport">
+    <div class="pp-row"><span class="pp-k">Name / preferred name</span><span class="pp-v"></span></div>
+    <div class="pp-row"><span class="pp-k">My condition</span><span class="pp-v">Severe ME/CFS — a recognized disability. Exertion, light, noise &amp; handling can make me much worse for days (post-exertional malaise).</span></div>
+    <div class="pp-row"><span class="pp-k">I may not be able to</span><span class="pp-v">speak, open my eyes, or move — but I hear and understand everything.</span></div>
+    <div class="pp-row"><span class="pp-k">Please always</span><span class="pp-v">keep light &amp; noise low · warn me before touch · cluster care into few visits · leave my eye mask, earplugs &amp; brace on · let my caregiver speak for me</span></div>
+    <div class="pp-row"><span class="pp-k">Please never</span><span class="pp-v">turn on bright lights · wake me for non-urgent vitals · rush or push activity · assume new symptoms are "just the ME"</span></div>
+    <div class="pp-row"><span class="pp-k">Communicates by</span><span class="pp-v"></span></div>
+    <div class="pp-row"><span class="pp-k">Allergies</span><span class="pp-v"></span></div>
+    <div class="pp-row"><span class="pp-k">Speak to my caregiver / proxy</span><span class="pp-v"></span></div>
+  </div>
+  <p class="sub" style="margin-top:10px">The crash &amp; communication cards in the <a href="tracking-documents.html#commcards" style="color:var(--accent)">Daily Care Forms</a> are the bedside companion to this — bring printed copies in the go-bag.</p>
+
+  <h2 class="sec" style="margin-top:34px">If accommodations slip — escalate</h2>
   <div class="card lever">
     <p class="chain">Frame it as <strong>ADA / Section 504 reasonable accommodation, not a request for favors</strong>, and move up the chain:</p>
     <p class="chain"><code>charge nurse</code> → <code>nursing supervisor</code> → <code>patient advocate / patient relations</code> → <code>the attending</code> → <code>ethics consult</code> if it comes to it.</p>
@@ -198,6 +230,21 @@
       <li><strong>Pack a go-bag:</strong> eye mask, earplugs, brace, comfort items, and the document packet — ready by the door.</li>
       <li><strong>Know the admission triggers</strong> so the call happens early, while a direct admit is still possible (see the trigger list kept with the care forms).</li>
     </ul>
+  </div>
+
+  <h2 class="sec" style="margin-top:34px">The one-page grab sheet</h2>
+  <p class="sub">The document packet above is only useful if a stranger can read it in thirty seconds. So keep <strong>one page on top</strong> that says everything an admitting team needs at a glance — diagnoses, baseline, current meds, allergies, what a crash looks like for her, and who to call. Fill it in privately, keep it in the go-bag, and update it whenever meds change.</p>
+  <div class="grabsheet">
+    <div class="gs-line"><span class="gs-k">Name / DOB</span><span class="gs-b"></span></div>
+    <div class="gs-line"><span class="gs-k">Diagnoses</span><span class="gs-b"></span></div>
+    <div class="gs-line"><span class="gs-k">Baseline function</span><span class="gs-b">(how severe she is on a normal day — e.g. bedbound, tube-fed, non-verbal, can't tolerate light/sound — so staff don't underestimate)</span></div>
+    <div class="gs-line"><span class="gs-k">Current meds &amp; doses</span><span class="gs-b"></span></div>
+    <div class="gs-line"><span class="gs-k">Allergies / reactions</span><span class="gs-b"></span></div>
+    <div class="gs-line"><span class="gs-k">A crash looks like</span><span class="gs-b">(her usual crash signs — so a crash isn't mistaken for an emergency)</span></div>
+    <div class="gs-line"><span class="gs-k">A real emergency is</span><span class="gs-b">(confusion, racing heart, trouble breathing, vomiting — the signs that <em>do</em> need urgent help)</span></div>
+    <div class="gs-line"><span class="gs-k">Specialist</span><span class="gs-b"></span></div>
+    <div class="gs-line"><span class="gs-k">Caregiver / proxy &amp; phone</span><span class="gs-b"></span></div>
+    <div class="gs-line"><span class="gs-k">Accommodations letter</span><span class="gs-b">attached — signed by Dr. ____________________</span></div>
   </div>
 
   <h2 class="sec" style="margin-top:34px">First, ask: can admission be avoided?</h2>
