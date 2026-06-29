@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>In-Home Care — Call Notes</title>
+<style>
+  :root{--ink:#1c2733;--muted:#5b6b7a;--line:#d9e0e6;--bg:#f6f8fa;--card:#fff;--accent:#2c6fb0;--using:#1f7a4d;--wip:#9a6b12;--no:#b03a3a;--backup:#8a98a5;}
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;}
+  .wrap{max-width:820px;margin:0 auto;padding:40px 24px 80px;}
+  header h1{font-size:1.85rem;margin:0 0 .35em;letter-spacing:-.01em;}
+  hr{border:0;border-top:1px solid var(--line);margin:28px 0;}
+  .hub-back{display:inline-flex;align-items:center;gap:6px;margin-bottom:16px;color:var(--accent);text-decoration:none;font-size:.9rem;}
+  .hub-back:hover{text-decoration:underline;}
+  .group-label{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin:30px 0 4px;}
+  .opt{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:12px;padding:18px 22px;margin:14px 0;box-shadow:0 1px 2px rgba(0,0,0,.03);}
+  .opt.using{border-left-color:var(--using);}
+  .opt.wip{border-left-color:var(--wip);}
+  .opt.no{border-left-color:var(--no);}
+  .opt.backup{border-left-color:var(--backup);}
+  .opt h2{font-size:1.14rem;margin:0 0 2px;display:flex;align-items:baseline;flex-wrap:wrap;gap:8px;}
+  .opt .tag{font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding:2px 8px;border-radius:20px;background:#eef2f5;color:var(--muted);}
+  .tag.pick{background:#eaf4ee;color:#1f7a4d;}
+  .tag.wip{background:#fdf3e3;color:#9a6b12;}
+  .tag.no{background:#fbecec;color:#b03a3a;}
+  .opt p{margin:8px 0 0;}
+  .opt ul{margin:8px 0 0;padding-left:18px;}
+  .opt li{margin:4px 0;}
+  .opt .sub{font-size:.92rem;color:var(--muted);}
+  .contact{margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:.95rem;}
+  .contact dl{display:grid;grid-template-columns:max-content 1fr;gap:3px 12px;margin:0;}
+  .contact dt{font-weight:600;color:var(--ink);}
+  .contact dd{margin:0;color:var(--muted);}
+  .contact a{color:var(--accent);text-decoration:none;}
+  .contact a:hover{text-decoration:underline;}
+  @media print{body{background:#fff;}.opt{box-shadow:none;break-inside:avoid;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="hub-back" href="index.html">← Care Hub</a>
+  <header>
+    <h1>In-Home Care — Call Notes</h1>
+  </header>
+
+  <hr>
+
+  <p class="group-label">Places we've called — and what we learned</p>
+
+  <div class="opt using">
+    <h2>Intravene Wellness Therapies <span class="tag pick">Using ✓</span></h2>
+    <p>The mobile-IV service the family has actually used and recommends — the go-to for at-home fluids.</p>
+    <ul>
+      <li>Every nurse is a <strong>critical-care RN</strong> (ICU/ER-trained); they <strong>only do IVs</strong>.</li>
+      <li><strong>Usually same-day</strong>, typically arriving within ~60–90 minutes during standard hours.</li>
+      <li><strong>About $200 per visit</strong> (starts at $169, varies by treatment). Private-pay.</li>
+      <li>Serves Seattle and the Eastside (Bellevue, Kirkland, Redmond, Mercer Island).</li>
+    </ul>
+    <p class="sub">When booking, describe the patient honestly — bedbound, severe ME/CFS, recent suspected medication reaction — and ask whether they'll accept the visit or want clinician clearance first. An IV treats dehydration, not the underlying reaction.</p>
+    <div class="contact">
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:12063398811">(206) 339-8811</a></dd>
+        <dt>Web</dt><dd><a href="https://intravenewellnesstherapies.com/seattle/">intravenewellnesstherapies.com/seattle</a></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="opt wip">
+    <h2>MD² (MD Squared), Bellevue <span class="tag wip">Intro in progress</span></h2>
+    <p>Concierge medicine where <strong>house calls are a signature, fee-covered part of the model</strong> — the doctor gives you their cell and will come to the home, day or night (<a href="https://www.md2.com/offering">md2.com/offering</a>). Each physician caps at ~50 families, which is what makes that access possible.</p>
+    <ul>
+      <li>Eastside physicians include <strong>Dr. Shawn Lee</strong> (1231 116th Ave NE, Ste 700, Bellevue; (425) 451-3043) and <strong>Dr. Amy Markezich</strong> (former Overlake critical-care / pulmonology — a strong fit for a fragile, complex patient).</li>
+      <li>Private-pay, ~$24,000/year (first family member). No ME/CFS specialty — would be the generalist quarterback, not the specialist brain.</li>
+    </ul>
+    <p class="sub"><strong>Status:</strong> a warm personal intro to MD² Bellevue (Dr. Shawn Lee) is in progress through a physician contact. Plan: wait for the intro, then follow up. <strong>To confirm:</strong> their model is built around mobile, traveling patients, so verify directly that they'll take a fully home-based patient (every visit a house call).</p>
+    <div class="contact">
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:14254513043">(425) 451-3043</a> <span style="color:var(--muted);">(MD² Bellevue)</span></dd>
+        <dt>Web</dt><dd><a href="https://www.md2.com/offering">md2.com/offering</a></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="opt no">
+    <h2>Discover Health MD <span class="tag no">Ruled out</span></h2>
+    <p><strong>Called June 29, 2026.</strong> Concierge primary care in Bellevue (Dr. Julie Cella, Dr. Jennifer Garcia-Rabbat). They only do home visits for <em>existing</em> patients who later became incapacitated — they don't accept patients whose care is primarily home-based from the start. Not a fit. They referred us to Pathway Geriatrics.</p>
+    <div class="contact">
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:14252843377">425.284.3377</a></dd>
+        <dt>Address</dt><dd>2950 Northup Way, Suite 210, Bellevue, WA 98004</dd>
+        <dt>Web</dt><dd><a href="https://www.discoverhealthmd.com/bellevue">discoverhealthmd.com/bellevue</a></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="opt no">
+    <h2>Pathway Geriatrics <span class="tag no">Ruled out</span></h2>
+    <p>Referred by Discover Health. The <em>model</em> is right — in-home primary care, insurance-billed (Medicare / Medicaid / most plans), with a 24/7 caregiver phone line — but two dealbreakers:</p>
+    <ul>
+      <li>They <strong>only serve licensed Adult Family Homes &amp; Assisted Living Facilities, not private homes</strong> (their site: "We currently limit our services to Adult Family Homes or Assisted Living Facilities").</li>
+      <li>They're <strong>geriatric / dementia-focused</strong> and NP-led.</li>
+    </ul>
+    <p class="sub"><strong>Takeaway:</strong> the right category to keep hunting is home-based primary care that visits private homes and isn't age-restricted.</p>
+    <div class="contact">
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:14258185311">(425) 818-5311</a></dd>
+        <dt>Web</dt><dd><a href="https://www.pathwaygeriatrics.com/">pathwaygeriatrics.com</a></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="opt backup">
+    <h2>Concierge Nursing Seattle <span class="tag">Backup only</span></h2>
+    <p>Another mobile-IV service covering Seattle and Bellevue (Hydration IV ~$225, anti-nausea infusion ~$275, $200 visit minimum). The phone intake didn't inspire confidence, so Intravene is preferred — but it's a reasonable backup if Intravene can't come.</p>
+    <div class="contact">
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:12064864102">(206) 486-4102</a></dd>
+        <dt>Web</dt><dd><a href="https://www.conciergenursingseattle.com/">conciergenursingseattle.com</a></dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="opt no">
+    <h2>ConciergeMD <span class="tag no">No answer</span></h2>
+    <p>Advertises on-demand Seattle house calls but <strong>didn't answer when called</strong>, and the site won't confirm whether an MD (versus a nurse practitioner or PA) does the visit. Worth a call only if you specifically want a doctor in the room — and ask the credential question directly.</p>
+    <div class="contact">
+      <dl>
+        <dt>Phone</dt><dd><a href="tel:13239314662">(323) 931-4662</a> <span style="color:var(--muted);">(LA-based company; serves Seattle)</span></dd>
+        <dt>Web</dt><dd><a href="https://conciergemdla.com/coverage-areas/seattle/house-call-doctor/">conciergemdla.com — Seattle house calls</a></dd>
+      </dl>
+    </div>
+  </div>
+</div>
+</body>
+</html>
